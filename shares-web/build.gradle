@@ -1,0 +1,7 @@
+group 'shares-parent'
+version '1.0-SNAPSHOT'
+apply plugin:"war"
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

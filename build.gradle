@@ -1,0 +1,169 @@
+
+allprojects {
+    apply plugin: 'java'
+    group 'shares-parent'
+    version = '1.0-SNAPSHOT'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        mavenCentral()
+        maven { url "http://repo.spring.io/release/" }
+        maven { url "http://repo.spring.io/milestone/" }
+    }
+}
+
+subprojects {
+    // java编译的时候缺省状态下会因为中文字符而失败
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    //定义版本号
+    ext {
+        springVersion = '3.2.11.RELEASE'
+        hibernateVersion = '4.3.1.Final'
+    }
+
+    jar {
+        manifest {
+            attributes("Implementation-Title": "Gradle")
+        }
+    }
+
+    configurations {
+        // 所有需要忽略的包定义在此
+        all*.exclude group: 'commons-httpclient'
+        all*.exclude group: 'commons-logging'
+        all*.exclude group: 'commons-beanutils', module: 'commons-beanutils'
+        compile.exclude module: 'spring'
+    }
+    configurations.all {
+        // check for updates every build
+        resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+
+    dependencies {
+        compile(
+                'org.springframework:spring-context:4.2.9.RELEASE',
+                'org.springframework:spring-core:4.2.9.RELEASE',
+                'org.springframework:spring-beans:4.2.9.RELEASE',
+                'org.springframework:spring-expression:4.2.9.RELEASE',
+                'org.springframework:spring-context-support:4.2.9.RELEASE',
+                'org.springframework:spring-jdbc:4.2.9.RELEASE',
+                'org.springframework:spring-tx:4.2.9.RELEASE',
+                'org.springframework:spring-web:4.2.9.RELEASE',
+                'org.springframework:spring-webmvc:4.2.9.RELEASE',
+                'org.springframework:spring-aspects:4.2.9.RELEASE',
+                'org.springframework:spring-aop:4.2.9.RELEASE',
+                'org.springframework:spring-oxm:4.2.9.RELEASE',
+                'org.springframework:spring-test:4.2.9.RELEASE',
+                'org.springframework.data:spring-data-commons:1.12.1.RELEASE',
+                'org.springframework.data:spring-data-mongodb:1.10.4.RELEASE',
+                /* log*/
+                'org.slf4j:slf4j-api:1.7.19',
+                'org.slf4j:jcl-over-slf4j:1.7.19',
+                'ch.qos.logback:logback-core:1.1.6',
+                'ch.qos.logback:logback-classic:1.1.6',
+                'log4j:log4j:1.2.16',
+                /* db */
+                'com.alibaba:druid:1.0.27',
+                'org.mybatis:mybatis:3.3.0',
+                'org.mybatis:mybatis-spring:1.2.3',
+                'mysql:mysql-connector-java:5.1.38',
+                /* AOP */
+                'aopalliance:aopalliance:1.0',
+                'org.aspectj:aspectjweaver:1.8.6',
+                /* ali fastjson */
+                'com.alibaba:fastjson:1.2.23',
+                'net.sf.json-lib:json-lib:2.4:jdk15',
+                /*httpclient*/
+                'commons-httpclient:commons-httpclient:3.1',
+                'org.apache.commons:commons-lang3:3.2.1',
+                'commons-beanutils:commons-beanutils:1.7.0',
+                /*shiro*/
+                'org.apache.shiro:shiro-core:1.3.2',
+                'org.apache.shiro:shiro-web:1.3.2',
+                'org.apache.shiro:shiro-spring:1.3.2',
+                'org.apache.shiro:shiro-ehcache:1.3.2',
+//            'javax.el:javax.el-api:2.2.5',
+                'javax.inject:javax.inject:1',
+//            'javax.servlet:javax.servlet-api:3.1.0',
+                'wsdl4j:wsdl4j:1.6.3',
+                'javax.xml:jaxrpc-api:1.1',
+                'javax.xml.soap:saaj-api:1.3.5',
+                /*fastxml*/
+                'com.fasterxml.jackson.core:jackson-core:2.6.7',
+                'com.fasterxml.jackson.core:jackson-databind:2.6.7',
+
+                'commons-fileupload:commons-fileupload:1.3',
+
+                'redis.clients:jedis:2.9.0',
+                'org.freemarker:freemarker:2.3.23',
+                'cn.dreampie:jfinal-shiro-freemarker:0.2',
+
+                'org.aspectj:aspectjweaver:1.8.6',
+                'org.projectlombok:lombok:1.16.8',
+                'javax.xml.bind:jaxb-api:2.2.12',
+                'com.sun.mail:javax.mail:1.5.2',
+                'javax.activation:activation:1.1.1',
+                /* Util */
+                'commons-io:commons-io:2.4',
+                'commons-codec:commons-codec:1.10',
+                'commons-fileupload:commons-fileupload:1.3.1',
+                'commons-configuration:commons-configuration:1.10',
+                'commons-collections:commons-collections:3.2.1',
+                'commons-discovery:commons-discovery:0.5',
+                'commons-beanutils:commons-beanutils:1.9.2',
+                'org.apache.commons:commons-exec:1.3',
+                'joda-time:joda-time:2.9.2',
+                'org.projectlombok:lombok:1.16.8',
+                'javax.xml.bind:jaxb-api:2.2.12',
+                'com.sun.mail:javax.mail:1.5.2',
+                'javax.activation:activation:1.1.1',
+                'com.eaio.uuid:uuid:3.2',
+                'com.google.guava:guava:20.0',
+                'com.google.code.gson:gson:2.3.1',
+                'org.mongodb:mongo-java-driver:3.2.2',
+                'org.mongodb.morphia:morphia:1.1.1',
+                'com.sun.el:el-ri:1.0',
+                'javax.validation:validation-api:1.1.0.Final',
+                'org.hibernate:hibernate-validator:5.4.1.Final',
+                'org.slf4j:slf4j-api:1.7.5',
+                'javax.el:el-api:2.2',
+                'javax.el:javax.el-api:3.0.0',
+                'javax.servlet:javax.servlet-api:3.1.0'
+        )
+
+        testCompile(
+                "junit:junit:4.11"
+        )
+    }
+
+    // 显示当前项目下所有用于 compile 的 jar.
+    task listJars(description: 'Display all compile jars.') << {
+        configurations.compile.each { File file -> println file.name }
+    }
+}
+
+project(':shares-web') {
+    dependencies {
+        compile project(':shares-common-util')
+        compile project(':shares-common-dal')
+        compile project(':shares-biz-shared')
+    }
+}
+
+project(':shares-core-service') {
+    dependencies {
+        compile project(':shares-core-model')
+        compile project(':shares-common-dal')
+        compile project(':shares-common-util')
+    }
+}
+
+project(':shares-biz-shared') {
+    dependencies {
+        compile project(':shares-core-service')
+        compile project(':shares-common-service-facade')
+    }
+}

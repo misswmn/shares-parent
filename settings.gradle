@@ -1,0 +1,12 @@
+rootProject.name = 'shares-parent'
+include 'shares-core-service'
+include 'shares-common-util'
+include 'shares-web'
+include 'shares-core-model'
+include 'shares-biz-shared'
+include 'shares-biz-service-implement'
+include 'shares-common-service-facade'
+include 'shares-common-service-integration'
+include 'shares-test-test'
+include 'shares-common-dal'
+
