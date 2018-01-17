@@ -1,4 +1,4 @@
-package com.shares.core.service.base;
+package com.shares.biz.shared.base;
 
 import com.shares.common.util.JsonUtils;
 import com.shares.core.service.exception.ResponseEnum;
@@ -37,7 +37,7 @@ public class LogAspect {
     private void monitor() {
     }
 
-    @Pointcut("execution(* com.shares.core.controller.*.*(..,org.springframework.validation.BindingResult))")
+    @Pointcut("execution(* com.shares.web.home.controller.*.*(..,org.springframework.validation.BindingResult))")
     private void controllerMonitor() {
     }
 

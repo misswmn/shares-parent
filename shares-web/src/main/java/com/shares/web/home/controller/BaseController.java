@@ -18,7 +18,7 @@ public class BaseController {
      */
     protected ModelAndView returnPage(ModelMap modelMap, String page, String msg) {
         if (StringUtils.isBlank(page)) {
-            throw new ServiceException(ResponseEnum.ILLEGAL_PARAM, "property 'page' config error");
+            throw new ServiceException(ResponseEnum.ILLEGAL_PARAM, "property 'page' app error");
         }
         modelMap.put("page", page);
         modelMap.put("msg", msg);

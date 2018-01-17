@@ -1,4 +1,4 @@
-package com.shares.web.home.config;
+package com.shares.web.home.app;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.shares.common.dal.plugin.common.repository.DefaultPageRepository;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-@MapperScan("com.orange.core.dao")
+@MapperScan("com.shares.common.dal.daointerface")
 @Configuration
 public class DataSourceConfig {
     @Value("${jdbc.url}")
@@ -79,7 +79,7 @@ public class DataSourceConfig {
     public SqlSessionFactoryBean sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setTypeAliasesPackage("com.orange.core.domain");
+        sessionFactory.setTypeAliasesPackage("com.shares.common.dal.daoobject");
         return sessionFactory;
     }
 

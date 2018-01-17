@@ -1,4 +1,4 @@
-package com.shares.web.home.config;
+package com.shares.web.home.app;
 
 import com.shares.biz.shared.shiro.CustomShiroSessionDAO;
 import com.shares.biz.shared.shiro.filter.LoginFilter;

@@ -1,4 +1,4 @@
-package com.shares.web.home.config;
+package com.shares.web.home.app;
 
 import com.shares.common.util.JedisClient;
 import org.springframework.beans.factory.annotation.Value;

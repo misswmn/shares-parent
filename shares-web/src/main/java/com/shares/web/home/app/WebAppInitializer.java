@@ -1,4 +1,4 @@
-package com.shares.web.home.config;
+package com.shares.web.home.app;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;

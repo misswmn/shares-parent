@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.shares.core.service.base;
+package com.shares.biz.shared.el;
 
-import com.shares.core.service.base.support.RelaxedBooleanTypeConverterDecorator;
+import com.shares.biz.shared.el.support.RelaxedBooleanTypeConverterDecorator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -45,7 +45,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import static com.shares.core.service.base.ReflectionUtils.extractStaticMethods;
+import static com.shares.biz.shared.el.ReflectionUtils.extractStaticMethods;
 import static org.springframework.util.StringUtils.hasText;
 
 /**

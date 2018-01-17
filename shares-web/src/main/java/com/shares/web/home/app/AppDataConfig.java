@@ -1,4 +1,4 @@
-package com.shares.web.home.config;
+package com.shares.web.home.app;
 
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.shares.core.service.base;
+package com.shares.biz.shared.el;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -1,4 +1,4 @@
-package com.shares.web.home.config;
+package com.shares.web.home.app;
 
 import freemarker.template.utility.XmlEscape;
 import org.hibernate.validator.HibernateValidator;

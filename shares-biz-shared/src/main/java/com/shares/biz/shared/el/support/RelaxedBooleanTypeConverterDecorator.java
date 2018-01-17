@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.shares.core.service.base.support;
+package com.shares.biz.shared.el.support;
 
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.expression.TypeConverter;
