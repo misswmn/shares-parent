@@ -2,6 +2,7 @@ package com.shares.biz.shared.shiro.filter;
 
 import com.shares.common.util.LoggerUtils;
 import net.sf.json.JSONObject;
+import org.apache.commons.io.IOUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -40,7 +41,6 @@ public class ShiroFilterUtils {
      * @throws
      */
     public static void out(ServletResponse response, Map<String, String> resultMap) {
-
         PrintWriter out = null;
         try {
             response.setCharacterEncoding("UTF-8");
@@ -49,10 +49,7 @@ public class ShiroFilterUtils {
         } catch (Exception e) {
             LoggerUtils.fmtError(CLAZZ, e, "输出JSON报错。");
         } finally {
-            if (null != out) {
-                out.flush();
-                out.close();
-            }
+            IOUtils.closeQuietly(out);
         }
     }
 }

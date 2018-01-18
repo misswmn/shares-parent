@@ -18,7 +18,6 @@ import java.util.Set;
  * @description
  */
 public final class JedisClient {
-    private Logger logger = LoggerFactory.getLogger(JedisClient.class);
     private JedisPool jedisPool;
 
     public void setJedisPool(JedisPool jedisPool) {
@@ -165,29 +164,6 @@ public final class JedisClient {
         try {
             jedis = jedisPool.getResource();
             return jedis.get(key);
-        } catch (JedisConnectionException e) {
-            if (jedis != null) {
-                jedis.close();
-                jedis = null;
-            }
-            throw e;
-        } finally {
-            if (jedis != null) {
-                jedis.close();
-                jedis = null;
-            }
-        }
-    }
-    /**
-     * 通过key获取删除在redis中的value
-     *
-     * @param key
-     * @return
-     */
-    public synchronized Long delete(String key) {
-        try {
-            jedis = jedisPool.getResource();
-            return jedis.del(key);
         } catch (JedisConnectionException e) {
             if (jedis != null) {
                 jedis.close();

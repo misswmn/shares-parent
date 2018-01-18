@@ -31,28 +31,9 @@ public class UserBO implements Serializable {
     private boolean rememberMe;
     private String mobile;
     private String address;
-    private Status status;
+    private String status;
+    private String isDelete;
     private Date createTime;
-    private Date lastUpdateTime;
-    private Date lastLoginTime;
-    private String description;
-
-    public static enum Status {
-        NORMAL(1, "正常"), DISABLED(2, "停用");
-        private int code;
-        private String desc;
-
-        Status(int code, String desc) {
-            this.code = code;
-            this.desc = desc;
-        }
-
-        public int getCode() {
-            return code;
-        }
-
-        public String getDesc() {
-            return desc;
-        }
-    }
+    private Date updateTime;
+    private String comments;
 }

@@ -10,8 +10,7 @@ import javax.inject.Inject;
  */
 @Component
 public class CustomSessionManager {
-    public static final String SESSION_STATUS = "orange-online-status";
-    
+
     @Inject
     private ShiroSessionRepository jedisShiroSessionRepository;
 }
