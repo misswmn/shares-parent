@@ -1,6 +1,7 @@
 package com.shares.biz.shared.shiro.token;
 
 import com.shares.core.model.bo.UserBO;
+import com.shares.core.model.enums.UserStatusEnum;
 import com.shares.core.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -33,15 +34,15 @@ public class DefaultRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         ShiroToken shiroToken = (ShiroToken) token;
-        UserBO user = userService.login(shiroToken.getUsername(), new String(shiroToken.getPassword()));
-        if (user == null) {
+        UserBO userBO = userService.login(shiroToken.getUsername(), new String(shiroToken.getPassword()));
+        if (userBO == null) {
             throw new AccountException("用户名或密码不正确");
-        } else if (user.getStatus() == UserBO.Status.DISABLED) {
+        } else if (UserStatusEnum.DISABLED.getCode().equals(userBO.getStatus())) {
             throw new DisabledAccountException("该用户已经被冻结");
         } else {
-            user.setLastUpdateTime(new Date());
-            userService.updateLastLoginTime(user);
+            userBO.setUpdateTime(new Date());
+            userService.updateLastLoginTime(userBO);
         }
-        return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+        return new SimpleAuthenticationInfo(userBO, userBO.getPassword(), getName());
     }
 }
