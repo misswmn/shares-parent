@@ -1,5 +1,6 @@
 package com.shares.core.service;
 
+import com.shares.common.dal.plugin.common.model.PageRequest;
 import com.shares.core.model.bo.*;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +20,7 @@ public interface UserService {
 
     void delete(@NotEmpty(message = "{user.service.delete.id}") String id);
 
-    List<UserBO> findAll();
+    List<UserBO> listUser(PageRequest<UserParamBO> pageRequest);
 
     void saveOne(@Valid ClientBO clientDTO);
 
@@ -31,6 +32,4 @@ public interface UserService {
 
     UserBO login(@NotNull(message = "{common.param.illegal}") String username,
                @NotNull(message = "{common.param.illegal}") String password);
-
-    void updateLastLoginTime(UserBO user);
 }

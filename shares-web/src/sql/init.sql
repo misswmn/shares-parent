@@ -1,12 +1,12 @@
 CREATE DATABASE
-IF NOT EXISTS orange DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+IF NOT EXISTS shares DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user` (
   `SEQ_ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-  `USER_ID` varchar(20) DEFAULT NULL COMMENT '用户编号',
-  `USERNAME` varchar(20) DEFAULT NULL COMMENT '用户名',
-  `PASSWORD` varchar(50) DEFAULT NULL COMMENT '密码',
+  `USER_ID` varchar(20) NOT NULL COMMENT '用户编号',
+  `USERNAME` varchar(20) NOT NULL COMMENT '用户名',
+  `PASSWORD` varchar(50) NOT NULL COMMENT '密码',
   `MOBILE` varchar(11) DEFAULT NULL COMMENT '手机号',
   `ADDRESS` varchar(200) DEFAULT NULL COMMENT '地址',
   `STATUS` int(11) DEFAULT NULL COMMENT '状态',
@@ -22,7 +22,7 @@ CREATE TABLE `sys_resource` (
   `RES_CODE` varchar(80) COLLATE utf8_bin NOT NULL COMMENT '资源编码,唯一',
   `RES_NAME` varchar(50) COLLATE utf8_bin NOT NULL COMMENT '资源名称',
   `PARENT_CODE` varchar(80) COLLATE utf8_bin DEFAULT NULL COMMENT '父编号、最上级的父编号为0',
-  `ICON` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '菜单图标,前端class名称',
+  `RES_ICON` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '菜单图标,前端class名称',
   `RES_DESC` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '资源描述',
   `RES_TYPE` varchar(20) COLLATE utf8_bin NOT NULL COMMENT '资源类型,MENU:页面菜单,BUTTON:操作(按钮),NODE:节点,类似于父节点没有页面',
   `SEQUENCE` int(11) DEFAULT NULL COMMENT '页面菜单目录,根据此字段排序',

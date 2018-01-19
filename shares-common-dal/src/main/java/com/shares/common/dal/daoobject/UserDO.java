@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,7 +24,6 @@ public class UserDO implements Serializable {
     private String userId;
     private String username;
     private String password;
-    private boolean rememberMe;
     private String mobile;
     private String address;
     private String status;

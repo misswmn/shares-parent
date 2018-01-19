@@ -2,6 +2,7 @@ package com.shares.common.dal.plugin.common.repository;
 
 import com.shares.common.dal.plugin.common.PaginationInterceptor;
 import com.shares.common.dal.plugin.common.model.PageParam;
+import com.shares.common.dal.plugin.common.model.PageRequest;
 import com.shares.common.dal.plugin.common.model.PageResult;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -53,14 +54,14 @@ public class DefaultPageRepository<T extends SqlSession> implements PageReposito
 	}
 
 	@Override
-	public <E> PageResult<E> selectPaging(Class mapperClass, String sqlId, PageParam parameter) {
+	public <E> PageResult<E> selectPaging(Class mapperClass, String sqlId, PageRequest<?> parameter) {
 		String statement = this.getStatement(mapperClass, sqlId);
 		return this.selectPaging(statement, parameter);
 	}
 
 	@Override
-	public <E> PageResult<E> selectPaging(String statement, PageParam parameter) {
-		return this.selectPaging(statement, parameter, parameter.getPage(), parameter.getCount());
+	public <E> PageResult<E> selectPaging(String statement, PageRequest<?> parameter) {
+		return this.selectPaging(statement, parameter.getParam(), parameter.getPage(), parameter.getCount());
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import com.shares.biz.shared.shiro.session.ShiroSessionRepository;
 import com.shares.common.util.JedisClient;
 import com.shares.common.util.SerializeUtil;
 import com.shares.core.model.bo.ConstantsBO;
-import com.shares.core.service.exception.ResponseEnum;
 import com.shares.core.service.exception.ServiceException;
 import org.apache.shiro.session.Session;
 import org.slf4j.Logger;

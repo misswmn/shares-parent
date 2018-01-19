@@ -1,7 +1,6 @@
 package com.shares.core.service.base;
 
 import com.shares.common.util.BeanUtil;
-import com.shares.core.service.exception.ResponseEnum;
 import com.shares.core.service.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +22,7 @@ public class BeanServiceUtil {
     public static <S, R> List<R> copy(List<S> list, Class<R> clazz, boolean emptyResult) throws ServiceException {
         try {
             if ((list == null || list.isEmpty()) && emptyResult) {
-                return new ArrayList<R>();
+                return new ArrayList<>();
             } else {
                 return BeanUtil.copy(list, clazz);
             }

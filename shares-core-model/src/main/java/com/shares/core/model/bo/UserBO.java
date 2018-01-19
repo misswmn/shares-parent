@@ -28,12 +28,9 @@ public class UserBO implements Serializable {
     private String username;
     @NotNull(message = "密码不能为空")
     private String password;
-    private boolean rememberMe;
     private String mobile;
     private String address;
     private String status;
-    private String isDelete;
     private Date createTime;
     private Date updateTime;
-    private String comments;
 }

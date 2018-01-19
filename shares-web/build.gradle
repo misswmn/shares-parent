@@ -5,3 +5,14 @@ apply plugin:"war"
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+def environment = hasProperty('env') ? env : 'local'
+project.ext.set("env", environment)
+
+processResources {
+    from 'src/env/' + project.env
+}
+
+war {
+    archiveName 'shares-web.war'
+}

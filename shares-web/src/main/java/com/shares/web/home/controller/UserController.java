@@ -24,7 +24,7 @@ public class UserController {
     @Inject
     private LoginBusiness loginBusiness;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST, name = "登录")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResultBean login(HttpServletRequest request, @Valid UserParamDTO user, BindingResult result) {
         return ResultBean.format(loginBusiness.login(request, user));
     }

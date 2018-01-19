@@ -44,24 +44,26 @@
 <script type="text/javascript" src="system/js/jquery.mloading.js"></script>
 <script type="text/javascript" src="system/js/MD5.js"></script>
 <script type="text/javascript" src="system/js/global.js"></script>
+<script type="text/javascript" src="system/js/shareshttp.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var $login = $("#login");
         $login.click(function () {
             var username = $("#username").val();
             var password = $("#password").val();
+            var $error = $(".error");
             if (username === '') {
-                $(".error").fadeOut("fast", function () {
-                    $(".error").css("top", "27px").show();
+                $error.fadeOut("fast", function () {
+                    $error.css("top", "27px").show();
                 });
-                $(".error").fadeIn("fast", function () {
+                $error.fadeIn("fast", function () {
                     $("#username").focus();
                 });
                 return false;
             }
-            if (password == '') {
-                $('.error').fadeOut('fast', function () {
-                    $('.error').css('top', '96px').show();
+            if (password === '') {
+                $error.fadeOut('fast', function () {
+                    $error.css('top', '96px').show();
                 });
                 $(this).find('.error').fadeIn('fast', function () {
                     $('.password').focus();
@@ -70,25 +72,23 @@
             }
             var data = {
                 username: username,
-                password: MD5(username + "#" + password),
+                password: MD5(password),
                 rememberMe: $("#rememberMe").is(":checked")
             };
-            $("body").mLoading();
-            $.post("${base}/user/login", data, function (data) {
-                $("body").mLoading("hide");
-                console.log(data);
-                if (data.code == 0) {
+
+            shareshttp.login(data, function (data) {
+                if (data.code === 0) {
                     location.href = data.content ? ${base}/ + data.content : ${base}/;
                 } else {
-                    $(".error").html(data.message || "登录失败");
+                    $error.html(data.message || "登录失败");
                     $("#username").focus();
                     $("#password").val("");
                 }
-            }, "json");
+            });
         });
         document.onkeydown = function (event) {
             var e = event || window.event || arguments.callee.caller.arguments[0];
-            if (e && e.keyCode == 13) $login.click();
+            if (e && e.keyCode === 13) $login.click();
         }
     })
 </script>

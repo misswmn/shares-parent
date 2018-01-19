@@ -1,7 +1,7 @@
 package com.shares.web.home.controller;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.shares.core.service.exception.ResponseEnum;
+import com.shares.common.service.facade.enums.ResponseEnum;
 import com.shares.core.service.exception.ResultBean;
 import com.shares.core.service.exception.ServiceException;
 import org.slf4j.Logger;

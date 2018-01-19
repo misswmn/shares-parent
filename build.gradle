@@ -158,6 +158,7 @@ project(':shares-core-service') {
         compile project(':shares-core-model')
         compile project(':shares-common-dal')
         compile project(':shares-common-util')
+        compile project(':shares-common-service-facade')
     }
 }
 

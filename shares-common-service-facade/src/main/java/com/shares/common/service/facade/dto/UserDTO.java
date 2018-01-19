@@ -2,6 +2,7 @@ package com.shares.common.service.facade.dto;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +16,12 @@ public class UserDTO {
     private List<String> roles;
     private String username;
     private String password;
+    private String mobile;
+    private String address;
+    private String status;
+    private Date createTime;
+    private Date updateTime;
+
     public List<String> getRoles() {
         return roles;
     }
@@ -37,5 +44,45 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
