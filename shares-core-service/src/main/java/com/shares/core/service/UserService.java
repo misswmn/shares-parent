@@ -1,13 +1,13 @@
 package com.shares.core.service;
 
 import com.shares.common.dal.plugin.common.model.PageRequest;
+import com.shares.common.dal.plugin.common.model.PageResult;
 import com.shares.core.model.bo.*;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * @author wangmn
@@ -20,7 +20,7 @@ public interface UserService {
 
     void delete(@NotEmpty(message = "{user.service.delete.id}") String id);
 
-    List<UserBO> listUser(PageRequest<UserParamBO> pageRequest);
+    PageResult<UserBO> listUser(PageRequest<UserParamBO> pageRequest);
 
     void saveOne(@Valid ClientBO clientDTO);
 

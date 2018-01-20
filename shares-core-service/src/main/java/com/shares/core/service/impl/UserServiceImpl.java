@@ -4,6 +4,8 @@ import com.shares.common.dal.daointerface.UserMapper;
 import com.shares.common.dal.daoobject.UserDO;
 import com.shares.common.dal.daoobject.UserParamDO;
 import com.shares.common.dal.plugin.common.model.PageRequest;
+import com.shares.common.dal.plugin.common.model.PageResult;
+import com.shares.common.dal.plugin.common.repository.PageRepository;
 import com.shares.core.model.bo.*;
 import com.shares.core.service.UserService;
 import com.shares.core.service.base.BeanServiceUtil;
@@ -11,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -22,6 +25,8 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Inject
+    private PageRepository pageRepository;
     @Autowired
     private UserMapper userMapper;
 
@@ -31,15 +36,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserBO> listUser(PageRequest<UserParamBO> pageRequest) {
+    public PageResult<UserBO> listUser(PageRequest<UserParamBO> pageRequest) {
         PageRequest<UserParamDO> request = new PageRequest<>();
         BeanUtils.copyProperties(pageRequest, request);
         UserParamDO paramDO = new UserParamDO();
         if (pageRequest.getParam() != null) {
             BeanUtils.copyProperties(pageRequest.getParam(), paramDO);
         }
-        List<UserDO> userDOS = userMapper.listUserByPage(request);
-        return BeanServiceUtil.copy(userDOS, UserBO.class);
+        PageResult<UserDO> pageResult = pageRepository.selectPaging(UserMapper.class, "listUserByPage", request);
+        PageResult<UserBO> result = new PageResult<>();
+        BeanUtils.copyProperties(pageRequest, request);
+        List<UserBO> userBOS = BeanServiceUtil.copy(pageResult.getRows(), UserBO.class);
+        result.setRows(userBOS);
+        return result;
     }
 
     @Override

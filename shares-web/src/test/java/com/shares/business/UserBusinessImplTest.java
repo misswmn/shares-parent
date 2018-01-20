@@ -4,6 +4,7 @@ import com.shares.biz.shared.UserBusiness;
 import com.shares.common.service.facade.dto.UserDTO;
 import com.shares.common.service.facade.dto.UserParamDTO;
 import com.shares.common.service.facade.dto.page.PageRequestDTO;
+import com.shares.common.service.facade.dto.page.PageResultDTO;
 import com.shares.common.util.JsonUtils;
 import com.shares.web.home.app.WebAppConfig;
 import org.junit.Test;
@@ -15,7 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.inject.Inject;
-import java.util.List;
 
 /**
  * @author wangmn
@@ -33,7 +33,7 @@ public class UserBusinessImplTest {
     @Test
     public void testListUser() {
         PageRequestDTO<UserParamDTO> requestDTO = new PageRequestDTO<>();
-        List<UserDTO> userDTOS = userBusiness.listUser(requestDTO);
+        PageResultDTO<UserDTO> userDTOS = userBusiness.listUser(requestDTO);
         LOGGER.info("{}", JsonUtils.objectToJson(userDTOS));
     }
 }
