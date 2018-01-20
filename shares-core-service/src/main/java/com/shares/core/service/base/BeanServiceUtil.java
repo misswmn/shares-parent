@@ -1,5 +1,6 @@
 package com.shares.core.service.base;
 
+import com.shares.common.service.facade.enums.ResponseEnum;
 import com.shares.common.util.BeanUtil;
 import com.shares.core.service.exception.ServiceException;
 import org.slf4j.Logger;

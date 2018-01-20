@@ -1,6 +1,8 @@
 package com.shares.core.service.exception;
 
 
+import com.shares.common.service.facade.enums.ResponseEnum;
+
 import java.io.Serializable;
 
 public class ResultBean implements Serializable {

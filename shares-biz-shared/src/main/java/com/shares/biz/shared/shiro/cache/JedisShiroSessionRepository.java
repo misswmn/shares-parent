@@ -2,6 +2,7 @@ package com.shares.biz.shared.shiro.cache;
 
 import com.shares.biz.shared.shiro.session.SessionStatus;
 import com.shares.biz.shared.shiro.session.ShiroSessionRepository;
+import com.shares.common.service.facade.enums.ResponseEnum;
 import com.shares.common.util.JedisClient;
 import com.shares.common.util.SerializeUtil;
 import com.shares.core.model.bo.ConstantsBO;

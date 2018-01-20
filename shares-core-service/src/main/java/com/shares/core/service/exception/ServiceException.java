@@ -1,5 +1,7 @@
 package com.shares.core.service.exception;
 
+import com.shares.common.service.facade.enums.ResponseEnum;
+
 public class ServiceException extends RuntimeException {
     private static final long serialVersionUID = -2009543102000237915L;
     private int code;

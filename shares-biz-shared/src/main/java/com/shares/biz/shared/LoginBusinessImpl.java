@@ -3,6 +3,7 @@ package com.shares.biz.shared;
 import com.shares.biz.shared.base.Business;
 import com.shares.biz.shared.shiro.token.manager.TokenManager;
 import com.shares.common.service.facade.dto.UserParamDTO;
+import com.shares.common.service.facade.enums.ResponseEnum;
 import com.shares.core.service.exception.ServiceException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.util.SavedRequest;

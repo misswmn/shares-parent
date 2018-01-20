@@ -1,5 +1,6 @@
 package com.shares.biz.shared.base;
 
+import com.shares.common.service.facade.enums.ResponseEnum;
 import com.shares.common.util.JsonUtils;
 import com.shares.core.service.exception.ServiceException;
 import org.apache.commons.lang.StringUtils;
