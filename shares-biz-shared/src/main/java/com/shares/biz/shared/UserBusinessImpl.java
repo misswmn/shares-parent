@@ -38,11 +38,11 @@ public class UserBusinessImpl implements UserBusiness {
         if (requestDTO.getParam() != null) {
             BeanUtils.copyProperties(requestDTO.getParam(), userParamBO);
         }
-        PageResult<UserBO> pageResult = userService.listUser(pageRequest);
-        PageResultDTO<UserDTO> resultDTO = new PageResultDTO<>();
+        PageResult<UserBO> resp = userService.listUser(pageRequest);
+        PageResultDTO<UserDTO> result = new PageResultDTO<>();
         BeanUtils.copyProperties(pageRequest, requestDTO);
-        List<UserDTO> userDTOS = BeanServiceUtil.copy(pageResult.getRows(), UserDTO.class, true);
-        resultDTO.setRows(userDTOS);
-        return resultDTO;
+        List<UserDTO> userDTOS = BeanServiceUtil.copy(resp.getRows(), UserDTO.class, true);
+        result.setRows(userDTOS);
+        return result;
     }
 }

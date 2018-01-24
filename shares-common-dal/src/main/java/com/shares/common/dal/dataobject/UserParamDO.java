@@ -1,4 +1,4 @@
-package com.shares.common.dal.daoobject;
+package com.shares.common.dal.dataobject;
 
 /**
  * @author wangmn

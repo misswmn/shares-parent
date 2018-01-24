@@ -1,4 +1,4 @@
-package com.shares.common.dal.daoobject;
+package com.shares.common.dal.dataobject;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

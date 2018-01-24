@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shares.common.dal.daointerface.SysUserInfoDOMapper">
+    <resultMap id="BaseResultMap" type="com.shares.common.dal.dataobject.auto.SysUserDO">
+        <id column="SEQ_ID" property="seqId" jdbcType="BIGINT"/>
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="USERNAME" property="username" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="IS_DELETE" property="isDelete" jdbcType="CHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="COMMENTS" property="comments" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="listUserByPage" resultMap="BaseResultMap"
+            parameterType="com.shares.common.dal.plugin.common.model.PageResult">
+        SELECT
+            USER_ID,
+            USERNAME,
+            PASSWORD,
+            MOBILE,
+            ADDRESS,
+            STATUS,
+            CREATE_TIME,
+            UPDATE_TIME
+        FROM
+            SYS_USER a
+        WHERE
+            a.IS_DELETE = 'N'
+        <include refid="listUserByPageQuery"></include>
+    </select>
+    <sql id="listUserByPageQuery">
+        <if test="param != null">
+            <if test="param.username != null and param.username != ''">
+                AND a.USERNAME = #{param.username}
+            </if>
+            <if test="param.password != null and param.password != ''">
+                AND a.USERNAME = #{param.username}
+            </if>
+        </if>
+    </sql>
+</mapper>

@@ -1,20 +1,24 @@
 package com.shares.web.home.app;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.shares.common.dal.plugin.common.PaginationInterceptor;
 import com.shares.common.dal.plugin.common.repository.DefaultPageRepository;
 import com.shares.common.dal.plugin.common.repository.PageRepository;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.Properties;
 
-@MapperScan("com.shares.common.dal.daointerface")
 @Configuration
 public class DataSourceConfig {
     @Value("${jdbc.url}")
@@ -79,7 +83,18 @@ public class DataSourceConfig {
     public SqlSessionFactoryBean sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setTypeAliasesPackage("com.shares.common.dal.daoobject");
+        // 分页插件
+        Interceptor paginationInterceptor = new PaginationInterceptor();
+        Properties properties = new Properties();
+        properties.setProperty("stmtIdRegex", "*.*ByPage");
+        properties.setProperty("dialect", "mysql");
+        paginationInterceptor.setProperties(properties);
+        sessionFactory.setPlugins(new Interceptor[]{paginationInterceptor});
+        sessionFactory.setTypeAliasesPackage("com.shares.common.dal.dataobject");
+        sessionFactory.setConfigLocation(new ClassPathResource("mybatis/mybatis-config.xml"));
+        PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
+        Resource[] resource = patternResolver.getResources("classpath*:mybatis/mapper/**/*.xml");
+        sessionFactory.setMapperLocations(resource);
         return sessionFactory;
     }
 

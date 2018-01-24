@@ -33,6 +33,8 @@ public class UserBusinessImplTest {
     @Test
     public void testListUser() {
         PageRequestDTO<UserParamDTO> requestDTO = new PageRequestDTO<>();
+        requestDTO.setPage(1);
+        requestDTO.setCount(10);
         PageResultDTO<UserDTO> userDTOS = userBusiness.listUser(requestDTO);
         LOGGER.info("{}", JsonUtils.objectToJson(userDTOS));
     }

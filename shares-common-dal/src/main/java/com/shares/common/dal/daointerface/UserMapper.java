@@ -1,7 +1,7 @@
 package com.shares.common.dal.daointerface;
 
-import com.shares.common.dal.daoobject.UserDO;
-import com.shares.common.dal.daoobject.UserParamDO;
+import com.shares.common.dal.dataobject.UserDO;
+import com.shares.common.dal.dataobject.UserParamDO;
 import com.shares.common.dal.plugin.common.model.PageRequest;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultType;
