@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         }
         PageResult<UserDO> pageResult = pageRepository.selectPaging(SysUserInfoDOMapper.class, "listUserByPage", request);
         PageResult<UserBO> result = new PageResult<>();
-        BeanUtils.copyProperties(pageRequest, request);
+        BeanUtils.copyProperties(pageResult, result);
         List<UserBO> userBOS = BeanServiceUtil.copy(pageResult.getRows(), UserBO.class);
         result.setRows(userBOS);
         return result;

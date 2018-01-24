@@ -168,3 +168,14 @@ project(':shares-biz-shared') {
         compile project(':shares-common-service-facade')
     }
 }
+
+project(':shares-test-test') {
+    dependencies {
+        compile project(':shares-web')
+        compile project(':shares-core-service')
+        compile project(':shares-common-service-facade')
+        compile project(':shares-core-model')
+        compile project(':shares-common-dal')
+        compile project(':shares-common-util')
+    }
+}

@@ -7,20 +7,20 @@ import java.util.List;
 public class PageResult<E> implements Serializable {
 	private static final long serialVersionUID = -831949827706950781L;
 	/** 第几页 */
-	private int page = 1;
+	private Integer page = 1;
 	/** 每页记录数 */
-	private int count = 10;
+	private Integer count = 10;
 	/** 当前页记录数 */
-	private int number;
+	private Integer number;
 	/** 总页数 */
-	private int totalPages;
+	private Integer totalPages;
 	/** 总记录数 */
-	private int total;
+	private Integer total;
 	/** 是否第一页 */
-	private boolean first = true;
+	private Boolean first = true;
 	/** 是否最后一页 */
-	private boolean last = true;
-	private List<E> rows = new ArrayList<E>();
+	private Boolean last = true;
+	private List<E> rows = new ArrayList<>();
 
 	public PageResult() {
 	}

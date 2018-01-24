@@ -1,4 +1,4 @@
-package com.shares.business;
+package com.shares.business.test;
 
 import com.shares.biz.shared.UserBusiness;
 import com.shares.common.service.facade.dto.UserDTO;
@@ -25,16 +25,16 @@ import javax.inject.Inject;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WebAppConfig.class})
 @WebAppConfiguration
-public class UserBusinessImplTest {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserBusinessImplTest.class);
+public class SysUserBusinessTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SysUserBusinessTest.class);
     @Inject
     private UserBusiness userBusiness;
 
     @Test
     public void testListUser() {
         PageRequestDTO<UserParamDTO> requestDTO = new PageRequestDTO<>();
-        requestDTO.setPage(1);
-        requestDTO.setCount(10);
+        requestDTO.setPage(2);
+        requestDTO.setCount(2);
         PageResultDTO<UserDTO> userDTOS = userBusiness.listUser(requestDTO);
         LOGGER.info("{}", JsonUtils.objectToJson(userDTOS));
     }

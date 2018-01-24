@@ -70,7 +70,7 @@ public class DefaultPageRepository<T extends SqlSession> implements PageReposito
 		List<E> rows = sqlSession.selectList(statement, parameter, rowBounds);
 		int total = PaginationInterceptor.getPaginationTotal();
 		PaginationInterceptor.clean();
-		PageResult<E> pageResult = new PageResult<E>(rows, total, page, count);
+		PageResult<E> pageResult = new PageResult<>(rows, total, page, count);
 		this.rendPageResult(pageResult, this.getRowBounds(page, count));
 		return pageResult;
 	}
