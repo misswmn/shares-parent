@@ -1,16 +1,20 @@
 package com.shares.core.service.impl;
 
 import com.shares.common.dal.daointerface.SysUserInfoDOMapper;
-import com.shares.common.dal.dataobject.UserDO;
+import com.shares.common.dal.daointerface.auto.SysUserDOMapper;
 import com.shares.common.dal.dataobject.UserParamDO;
+import com.shares.common.dal.dataobject.auto.SysUserDO;
+import com.shares.common.dal.dataobject.auto.SysUserDOExample;
 import com.shares.common.dal.plugin.common.model.PageRequest;
 import com.shares.common.dal.plugin.common.model.PageResult;
 import com.shares.common.dal.plugin.common.repository.PageRepository;
 import com.shares.core.model.bo.*;
+import com.shares.core.model.enums.IsDeleteEnum;
 import com.shares.core.service.UserService;
 import com.shares.core.service.base.BeanServiceUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -26,24 +30,26 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private PageRepository pageRepository;
+    @Inject
+    private SysUserDOMapper sysUserDOMapper;
 
     @Override
     public void delete(String id) {
     }
 
     @Override
-    public PageResult<UserBO> listUser(PageRequest<UserParamBO> pageRequest) {
+    public PageResult<SysUserBO> listUser(PageRequest<UserParamBO> pageRequest) {
         PageRequest<UserParamDO> request = new PageRequest<>();
         BeanUtils.copyProperties(pageRequest, request);
         UserParamDO paramDO = new UserParamDO();
         if (pageRequest.getParam() != null) {
             BeanUtils.copyProperties(pageRequest.getParam(), paramDO);
         }
-        PageResult<UserDO> pageResult = pageRepository.selectPaging(SysUserInfoDOMapper.class, "listUserByPage", request);
-        PageResult<UserBO> result = new PageResult<>();
+        PageResult<SysUserDO> pageResult = pageRepository.selectPaging(SysUserInfoDOMapper.class, "listUserByPage", request);
+        PageResult<SysUserBO> result = new PageResult<>();
         BeanUtils.copyProperties(pageResult, result);
-        List<UserBO> userBOS = BeanServiceUtil.copy(pageResult.getRows(), UserBO.class);
-        result.setRows(userBOS);
+        List<SysUserBO> sysUserBOS = BeanServiceUtil.copy(pageResult.getRows(), SysUserBO.class);
+        result.setRows(sysUserBOS);
         return result;
     }
 
@@ -69,7 +75,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserBO login(String username, String password) {
-        return null;
+    public SysUserBO login(String username, String password) {
+        SysUserDOExample example = new SysUserDOExample();
+        example.createCriteria().andUsernameEqualTo(username)
+                .andPasswordEqualTo(password).andIsDeleteEqualTo(IsDeleteEnum.N.getCode());
+        List<SysUserDO> sysUserDOList = sysUserDOMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(sysUserDOList)) {
+            return null;
+        }
+        SysUserDO sysUserDO = sysUserDOList.get(0);
+        SysUserBO sysUserBO = new SysUserBO();
+        BeanUtils.copyProperties(sysUserDO, sysUserBO);
+        return sysUserBO;
     }
 }

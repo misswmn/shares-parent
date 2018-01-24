@@ -7,7 +7,7 @@ import com.shares.common.service.facade.dto.UserDTO;
 import com.shares.common.service.facade.dto.UserParamDTO;
 import com.shares.common.service.facade.dto.page.PageRequestDTO;
 import com.shares.common.service.facade.dto.page.PageResultDTO;
-import com.shares.core.model.bo.UserBO;
+import com.shares.core.model.bo.SysUserBO;
 import com.shares.core.model.bo.UserParamBO;
 import com.shares.core.service.UserService;
 import com.shares.core.service.base.BeanServiceUtil;
@@ -38,7 +38,7 @@ public class UserBusinessImpl implements UserBusiness {
         if (requestDTO.getParam() != null) {
             BeanUtils.copyProperties(requestDTO.getParam(), userParamBO);
         }
-        PageResult<UserBO> resp = userService.listUser(pageRequest);
+        PageResult<SysUserBO> resp = userService.listUser(pageRequest);
         PageResultDTO<UserDTO> result = new PageResultDTO<>();
         BeanUtils.copyProperties(resp, result);
         List<UserDTO> userDTOS = BeanServiceUtil.copy(resp.getRows(), UserDTO.class, true);

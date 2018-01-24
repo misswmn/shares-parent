@@ -20,7 +20,7 @@ public interface UserService {
 
     void delete(@NotEmpty(message = "{user.service.delete.id}") String id);
 
-    PageResult<UserBO> listUser(PageRequest<UserParamBO> pageRequest);
+    PageResult<SysUserBO> listUser(PageRequest<UserParamBO> pageRequest);
 
     void saveOne(@Valid ClientBO clientDTO);
 
@@ -30,6 +30,6 @@ public interface UserService {
 
     void save(@NotNull(message = "{common.param.illegal}") @Valid SampleBO sample);
 
-    UserBO login(@NotNull(message = "{common.param.illegal}") String username,
-               @NotNull(message = "{common.param.illegal}") String password);
+    SysUserBO login(@NotNull(message = "{common.param.illegal}") String username,
+                    @NotNull(message = "{common.param.illegal}") String password);
 }

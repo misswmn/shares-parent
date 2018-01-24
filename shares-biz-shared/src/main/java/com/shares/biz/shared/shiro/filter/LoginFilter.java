@@ -2,7 +2,7 @@ package com.shares.biz.shared.shiro.filter;
 
 import com.shares.biz.shared.shiro.token.manager.TokenManager;
 import com.shares.common.util.LoggerUtils;
-import com.shares.core.model.bo.UserBO;
+import com.shares.core.model.bo.SysUserBO;
 import org.apache.shiro.web.filter.AccessControlFilter;
 
 import javax.servlet.ServletRequest;
@@ -18,7 +18,7 @@ public class LoginFilter extends AccessControlFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-        UserBO user = TokenManager.getCurrentUser();
+        SysUserBO user = TokenManager.getCurrentUser();
         if (user != null || isLoginRequest(request, response)) {
             return true;
         }

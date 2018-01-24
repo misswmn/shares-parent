@@ -2,7 +2,7 @@ package com.shares.biz.shared.shiro.token.manager;
 
 import com.shares.biz.shared.shiro.token.ShiroToken;
 import com.shares.common.service.facade.dto.UserParamDTO;
-import com.shares.core.model.bo.UserBO;
+import com.shares.core.model.bo.SysUserBO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 
@@ -12,7 +12,7 @@ import org.apache.shiro.session.Session;
  */
 public class TokenManager {
 
-    public static UserBO login(UserParamDTO user) {
+    public static SysUserBO login(UserParamDTO user) {
         ShiroToken token = new ShiroToken(user.getUsername(), user.getPassword(), user.isRememberMe());
         SecurityUtils.getSubject().login(token);
         return getCurrentUser();
@@ -21,8 +21,8 @@ public class TokenManager {
     /**
      * 获取当前登录的用户对象
      */
-    public static UserBO getCurrentUser() {
-        return (UserBO) SecurityUtils.getSubject().getPrincipal();
+    public static SysUserBO getCurrentUser() {
+        return (SysUserBO) SecurityUtils.getSubject().getPrincipal();
     }
 
     public static Session getSession() {

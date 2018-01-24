@@ -20,7 +20,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserBO implements Serializable {
+public class SysUserBO implements Serializable {
     private static final long serialVersionUID = -3827268739415842545L;
     private Long id;
     @NotNull(message = "用户名不能为空")

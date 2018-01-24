@@ -1,6 +1,6 @@
 package com.shares.biz.shared.shiro.token;
 
-import com.shares.core.model.bo.UserBO;
+import com.shares.core.model.bo.SysUserBO;
 import com.shares.core.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -31,10 +31,10 @@ public class DefaultRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         ShiroToken shiroToken = (ShiroToken) token;
-        UserBO userBO = userService.login(shiroToken.getUsername(), new String(shiroToken.getPassword()));
-        if (userBO == null) {
+        SysUserBO sysUserBO = userService.login(shiroToken.getUsername(), new String(shiroToken.getPassword()));
+        if (sysUserBO == null) {
             throw new AuthenticationException("用户名或密码错误");
         }
-        return new SimpleAuthenticationInfo(userBO, userBO.getPassword(), getName());
+        return new SimpleAuthenticationInfo(sysUserBO, sysUserBO.getPassword(), getName());
     }
 }
