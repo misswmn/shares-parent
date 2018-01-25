@@ -3,8 +3,7 @@ package com.shares.biz.shared;
 import com.shares.biz.shared.base.Business;
 import com.shares.common.dal.plugin.common.model.PageRequest;
 import com.shares.common.dal.plugin.common.model.PageResult;
-import com.shares.common.service.facade.dto.UserDTO;
-import com.shares.common.service.facade.dto.UserParamDTO;
+import com.shares.common.service.facade.dto.SysUserParamDTO;
 import com.shares.common.service.facade.dto.page.PageRequestDTO;
 import com.shares.common.service.facade.dto.page.PageResultDTO;
 import com.shares.core.model.bo.SysUserBO;
@@ -31,18 +30,19 @@ public class UserBusinessImpl implements UserBusiness {
     private UserService userService;
 
     @Override
-    public PageResultDTO<UserDTO> listUser(PageRequestDTO<UserParamDTO> requestDTO) throws ServiceException {
+    public PageResultDTO<SysUserParamDTO> listUser(PageRequestDTO<SysUserParamDTO> requestDTO) throws ServiceException {
         PageRequest<UserParamBO> pageRequest = new PageRequest<>();
         BeanUtils.copyProperties(requestDTO, pageRequest);
-        UserParamBO userParamBO = new UserParamBO();
         if (requestDTO.getParam() != null) {
+            UserParamBO userParamBO = new UserParamBO();
             BeanUtils.copyProperties(requestDTO.getParam(), userParamBO);
+            pageRequest.setParam(userParamBO);
         }
         PageResult<SysUserBO> resp = userService.listUser(pageRequest);
-        PageResultDTO<UserDTO> result = new PageResultDTO<>();
+        PageResultDTO<SysUserParamDTO> result = new PageResultDTO<>();
         BeanUtils.copyProperties(resp, result);
-        List<UserDTO> userDTOS = BeanServiceUtil.copy(resp.getRows(), UserDTO.class, true);
-        result.setRows(userDTOS);
+        List<SysUserParamDTO> sysUserParamDTOS = BeanServiceUtil.copy(resp.getRows(), SysUserParamDTO.class, true);
+        result.setRows(sysUserParamDTOS);
         return result;
     }
 }

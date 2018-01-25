@@ -22,7 +22,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class SysUserBO implements Serializable {
     private static final long serialVersionUID = -3827268739415842545L;
-    private Long id;
+    private String userId;
     @NotNull(message = "用户名不能为空")
     @Pattern(regexp = "^[a-zA-Z]{5,20}$", message = "用户名格式不正确")
     private String username;

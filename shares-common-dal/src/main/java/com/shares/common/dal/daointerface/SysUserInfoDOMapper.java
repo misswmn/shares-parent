@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface SysUserInfoDOMapper {
     List<SysUserDO> listUserByPage(PageRequest<SysUserDO> request);
+
+    List<String> getPermissions(String userId);
 }

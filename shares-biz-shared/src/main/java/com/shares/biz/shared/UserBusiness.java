@@ -1,7 +1,6 @@
 package com.shares.biz.shared;
 
-import com.shares.common.service.facade.dto.UserDTO;
-import com.shares.common.service.facade.dto.UserParamDTO;
+import com.shares.common.service.facade.dto.SysUserParamDTO;
 import com.shares.common.service.facade.dto.page.PageRequestDTO;
 import com.shares.common.service.facade.dto.page.PageResultDTO;
 import com.shares.core.service.exception.ServiceException;
@@ -20,5 +19,5 @@ public interface UserBusiness {
      * @description
      * @date 2018/1/19 16:33
      */
-    PageResultDTO<UserDTO> listUser(PageRequestDTO<UserParamDTO> requestDTO) throws ServiceException;
+    PageResultDTO<SysUserParamDTO> listUser(PageRequestDTO<SysUserParamDTO> requestDTO) throws ServiceException;
 }

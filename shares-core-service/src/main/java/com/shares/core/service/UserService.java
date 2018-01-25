@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * @author wangmn
@@ -32,4 +33,14 @@ public interface UserService {
 
     SysUserBO login(@NotNull(message = "{common.param.illegal}") String username,
                     @NotNull(message = "{common.param.illegal}") String password);
+
+    /**
+     * 获取用户权限
+     *
+     * @param userId
+     * @author ex-wangmengnan
+     * @description
+     * @date 2018/1/25 16:22
+     */
+    List<String> getPermissions(String userId);
 }

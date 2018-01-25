@@ -1,5 +1,6 @@
 package com.shares.web.home.app;
 
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -13,13 +14,13 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 public class AppDataConfig {
 
-    /*@Bean
+    @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer configurer = new MapperScannerConfigurer();
         configurer.setBasePackage("com.shares.common.dal.daointerface");
         configurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         return configurer;
-    }*/
+    }
 
     @Bean
     public PropertySourcesPlaceholderConfigurer propertySourcesEnv() {

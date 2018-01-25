@@ -3,22 +3,29 @@
     var url = {"login": "/user/login"};
     window.shareshttp = {
         post: function (url, data, cb) {
-            var dtd = $.Deferred();
             var path = this.getPath(url);
-            var task = function (dtd) {
-                $.ajax(path, {data: data, type: "POST"}).done(function (data) {
-                    typeof cb === 'function' && cb(data);
-                    dtd.resolve();
-                }).fail(function (data) {
-                    alert("系统繁忙,请稍后重试");
-                    dtd.reject();
-                }).always(function () {
-                    $("body").mLoading("hide");
-                });
-                return dtd;
+            var reject = function (reason) {
+                var dfr = $.Deferred();
+                dfr.reject(reason);
+                return dfr.promise();
             };
             $("body").mLoading();
-            task(dtd);
+            $.ajax(path, {data: data, type: "POST"})
+                .then(function (response) {
+                    if (response.code === 0) {
+                        typeof cb === 'function' && cb(response);
+                    } else {
+                        alert(response.message || "系统错误");
+                        reject(response);
+                    }
+                }, function (xhr) {
+                    alert("网络错误");
+                    reject({
+                        xhr: xhr
+                    });
+                }).always(function () {
+                $("body").mLoading("hide");
+            });
         },
         getPath: function (url) {
             return domain + url;

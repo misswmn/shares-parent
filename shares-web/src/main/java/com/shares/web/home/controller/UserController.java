@@ -2,7 +2,7 @@ package com.shares.web.home.controller;
 
 import com.shares.biz.shared.LoginBusiness;
 import com.shares.biz.shared.UserBusiness;
-import com.shares.common.service.facade.dto.UserParamDTO;
+import com.shares.common.service.facade.dto.SysUserParamDTO;
 import com.shares.core.service.exception.ResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,12 +28,12 @@ public class UserController {
     private UserBusiness userBusiness;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResultBean login(HttpServletRequest request, @Valid UserParamDTO user, BindingResult result) {
+    public ResultBean login(HttpServletRequest request, @Valid SysUserParamDTO user, BindingResult result) {
         return ResultBean.format(loginBusiness.login(request, user));
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public ResultBean list(HttpServletRequest request, @Valid UserParamDTO user, BindingResult result) {
+    public ResultBean list(HttpServletRequest request, @Valid SysUserParamDTO user, BindingResult result) {
         return ResultBean.format(userBusiness.listUser(null));
     }
 }

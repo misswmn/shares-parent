@@ -32,6 +32,8 @@ public class UserServiceImpl implements UserService {
     private PageRepository pageRepository;
     @Inject
     private SysUserDOMapper sysUserDOMapper;
+    @Inject
+    private SysUserInfoDOMapper sysUserInfoDOMapper;
 
     @Override
     public void delete(String id) {
@@ -41,8 +43,8 @@ public class UserServiceImpl implements UserService {
     public PageResult<SysUserBO> listUser(PageRequest<UserParamBO> pageRequest) {
         PageRequest<UserParamDO> request = new PageRequest<>();
         BeanUtils.copyProperties(pageRequest, request);
-        UserParamDO paramDO = new UserParamDO();
         if (pageRequest.getParam() != null) {
+            UserParamDO paramDO = new UserParamDO();
             BeanUtils.copyProperties(pageRequest.getParam(), paramDO);
         }
         PageResult<SysUserDO> pageResult = pageRepository.selectPaging(SysUserInfoDOMapper.class, "listUserByPage", request);
@@ -87,5 +89,11 @@ public class UserServiceImpl implements UserService {
         SysUserBO sysUserBO = new SysUserBO();
         BeanUtils.copyProperties(sysUserDO, sysUserBO);
         return sysUserBO;
+    }
+
+    @Override
+    public List<String> getPermissions(String userId) {
+        List<String> permissions = sysUserInfoDOMapper.getPermissions(userId);
+        return null;
     }
 }

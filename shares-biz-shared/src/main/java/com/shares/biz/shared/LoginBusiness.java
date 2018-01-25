@@ -1,7 +1,7 @@
 package com.shares.biz.shared;
 
 
-import com.shares.common.service.facade.dto.UserParamDTO;
+import com.shares.common.service.facade.dto.SysUserParamDTO;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,5 +17,5 @@ public interface LoginBusiness {
      * @param user
      * @return url
      */
-    String login(HttpServletRequest request, UserParamDTO user);
+    String login(HttpServletRequest request, SysUserParamDTO user);
 }

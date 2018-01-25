@@ -14,12 +14,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
 public class DataSourceConfig {
     @Value("${jdbc.url}")
     private String jdbcurl;
@@ -106,5 +109,14 @@ public class DataSourceConfig {
     @Bean
     public PageRepository pageRepository() throws Exception {
         return new DefaultPageRepository<>(sqlSession());
+    }
+
+    @Bean
+    public DataSourceTransactionManager transactionManager() throws SQLException {
+        DataSourceTransactionManager tx = new DataSourceTransactionManager();
+        tx.setDataSource(dataSource());
+        tx.setRollbackOnCommitFailure(true);
+        tx.setNestedTransactionAllowed(true);
+        return tx;
     }
 }

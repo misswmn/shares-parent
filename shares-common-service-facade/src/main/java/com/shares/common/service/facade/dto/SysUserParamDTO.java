@@ -1,7 +1,5 @@
 package com.shares.common.service.facade.dto;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +9,7 @@ import java.util.List;
  * @date 2017/6/27
  * @description
  */
-public class UserDTO {
-    @NotEmpty(message = "{common.param.illegal}")
+public class SysUserParamDTO {
     private List<String> roles;
     private String username;
     private String password;
