@@ -111,24 +111,24 @@ public class ShiroConfig {
         return new JavaUuidSessionIdGenerator();
     }
 
-    /*@Bean
+    @Bean
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
         rememberMeManager.setCipherKey(Base64.decode("fuck"));
         rememberMeManager.setCookie(rememberMeCookie());
         return rememberMeManager;
-    }*/
+    }
 
     /**
      * 用户信息记住我功能的相关配置
      */
-    /*@Bean
+    @Bean
     public SimpleCookie rememberMeCookie() {
         SimpleCookie cookie = new SimpleCookie("v_v-re-baidu");
         cookie.setHttpOnly(true);
         cookie.setMaxAge(30 * 24 * 3600);
         return cookie;
-    }*/
+    }
 
     @Bean
     public Realm defaultRealm() {
@@ -146,7 +146,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public MethodInvokingFactoryBean securityUtils() {
+    public MethodInvokingFactoryBean setSecurityManagerFactoryBean() {
         MethodInvokingFactoryBean methodInvokingFactoryBean = new MethodInvokingFactoryBean();
         methodInvokingFactoryBean.setStaticMethod("org.apache.shiro.SecurityUtils.setSecurityManager");
         methodInvokingFactoryBean.setArguments(new Object[]{securityManager()});

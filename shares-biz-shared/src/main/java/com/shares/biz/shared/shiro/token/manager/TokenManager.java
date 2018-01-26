@@ -1,9 +1,9 @@
 package com.shares.biz.shared.shiro.token.manager;
 
-import com.shares.biz.shared.shiro.token.ShiroToken;
 import com.shares.common.service.facade.dto.SysUserParamDTO;
 import com.shares.core.model.bo.SysUserBO;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 
 /**
@@ -13,7 +13,7 @@ import org.apache.shiro.session.Session;
 public class TokenManager {
 
     public static SysUserBO login(SysUserParamDTO user) {
-        ShiroToken token = new ShiroToken(user.getUsername(), user.getPassword(), false);
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword(), false);
         SecurityUtils.getSubject().login(token);
         return getCurrentUser();
     }

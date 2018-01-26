@@ -3,24 +3,25 @@ package com.shares.biz.shared.shiro.cache;
 import com.shares.biz.shared.shiro.session.SessionStatus;
 import com.shares.biz.shared.shiro.session.ShiroSessionRepository;
 import com.shares.common.service.facade.enums.ResponseEnum;
-import com.shares.common.util.JedisClient;
-import com.shares.common.util.SerializeUtil;
 import com.shares.core.model.bo.ConstantsBO;
 import com.shares.core.service.exception.ServiceException;
 import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class JedisShiroSessionRepository implements ShiroSessionRepository {
     private static final Logger LOGGER = LoggerFactory.getLogger(JedisShiroSessionRepository.class);
     @Inject
-    private JedisClient jedisClient;
+    private RedisTemplate<String, Session> redisTemplate;
 
     @Override
     public void saveSession(Session session) {
@@ -31,10 +32,10 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
             SessionStatus sessionStatus = new SessionStatus();
             session.setAttribute(ConstantsBO.Session.SHARES_SESSION_STATUS, sessionStatus);
         }
-        byte[] key = SerializeUtil.serialize(buildRedisSessionKey(session.getId()));
-        byte[] value = SerializeUtil.serialize(session);
+        String sessionKey = buildRedisSessionKey(session.getId());
         long sessionTimeout = session.getTimeout() / 1000;
-        jedisClient.set(key, value, (int) sessionTimeout);
+        ValueOperations<String, Session> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(sessionKey, session, sessionTimeout, TimeUnit.SECONDS);
     }
 
     @Override
@@ -44,10 +45,9 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 
     @Override
     public Session getSession(Serializable sessionId) {
-        byte[] key = SerializeUtil.serialize(buildRedisSessionKey(sessionId));
-        byte[] sessionBytes = jedisClient.get(key);
-        if (sessionBytes == null) return null;
-        return SerializeUtil.deserialize(sessionBytes, Session.class);
+        String sessionKey = buildRedisSessionKey(sessionId);
+        ValueOperations<String, Session> valueOperations = redisTemplate.opsForValue();
+        return valueOperations.get(sessionKey);
     }
 
     @Override

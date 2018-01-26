@@ -30,19 +30,19 @@ public class DefaultRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String userId = TokenManager.getUserId();
-        if (userId == null) {
+        SysUserBO userBO = (SysUserBO) principals.getPrimaryPrincipal();
+        if (userBO == null) {
             return null;
         }
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        Set<String> permissions = new HashSet<>(userService.getPermissions(userId));
+        Set<String> permissions = new HashSet<>(userService.getPermissions(userBO.getUserId()));
         authorizationInfo.setStringPermissions(permissions);
         return authorizationInfo;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        ShiroToken shiroToken = (ShiroToken) token;
+        UsernamePasswordToken shiroToken = (UsernamePasswordToken) token;
         SysUserBO sysUserBO = userService.login(shiroToken.getUsername(), new String(shiroToken.getPassword()));
         if (sysUserBO == null) {
             throw new IncorrectCredentialsException("用户名或密码错误");

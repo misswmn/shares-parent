@@ -35,3 +35,5 @@ gen
 
 out/
 build/
+.gradle
+.gradle/

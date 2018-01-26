@@ -3,6 +3,10 @@ package com.shares.web.home.app;
 import com.shares.common.util.JedisClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +45,10 @@ public class WebAppConfig {
     private int redisMaxTotal;
     @Value("${redis.pool.maxWaitMillis}")
     private int redisMaxWaitMillis;
+    @Value("${redis.pool.testOnBorrow}")
+    private boolean testOnBorrow;
+    @Value("${redis.pool.testWhileIdle}")
+    private boolean testWhileIdle;
 
     @Bean
     public JedisClient jedisClient() {
@@ -50,12 +58,40 @@ public class WebAppConfig {
     }
 
     @Bean
-    public JedisPool jedisPool() {
+    public JedisPoolConfig poolConfig() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(redisMaxIdle);
         jedisPoolConfig.setMinIdle(redisMinIdle);
         jedisPoolConfig.setMaxTotal(redisMaxTotal);
         jedisPoolConfig.setMaxWaitMillis(redisMaxWaitMillis);
-        return new JedisPool(jedisPoolConfig, host, port, redisTimeout);
+        jedisPoolConfig.setTestOnBorrow(testOnBorrow);
+        jedisPoolConfig.setTestWhileIdle(testWhileIdle);
+        return jedisPoolConfig;
+    }
+
+    @Bean
+    public JedisPool jedisPool() {
+        return new JedisPool(poolConfig(), host, port, redisTimeout);
+    }
+
+    @Bean
+    public JedisConnectionFactory connectionFactory() {
+        JedisConnectionFactory factory = new JedisConnectionFactory();
+        factory.setHostName(host);
+        factory.setPort(port);
+        factory.setTimeout(redisTimeout);
+        factory.setPoolConfig(poolConfig());
+        return factory;
+    }
+
+    @Bean
+    public RedisTemplate redisTemplate() {
+        RedisTemplate redisTemplate = new RedisTemplate();
+        redisTemplate.setConnectionFactory(connectionFactory());
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
+        return redisTemplate;
     }
 }
