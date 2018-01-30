@@ -1,5 +1,5 @@
 ;$(function () {
-    var domain = "http://localhost:8080/shares";
+    var domain = "http://mreagle.cn:8080/shares";
     var url = {"login": "/user/login"};
     window.shareshttp = {
         post: function (url, data, cb) {

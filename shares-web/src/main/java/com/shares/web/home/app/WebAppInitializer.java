@@ -41,7 +41,4 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new CharacterEncodingFilter("UTF-8", true);
     }
 
-    private DelegatingFilterProxy shiroFilterProxy() {
-        return new DelegatingFilterProxy();
-    }
 }

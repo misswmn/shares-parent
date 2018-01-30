@@ -34,7 +34,7 @@ public class DataSourceConfig {
     private String driverClass;
     @Value("${jdbc.initialSize}")
     private int initialSize;
-    //    @Value("${jdbc.maxActive}")
+    @Value("${jdbc.maxActive}")
     private int maxActive = 20;
     @Value("${jdbc.minIdle}")
     private int minIdle;

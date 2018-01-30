@@ -1,5 +1,6 @@
 package com.shares.web.home.app;
 
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,5 +26,10 @@ public class AppDataConfig {
     @Bean
     public PropertySourcesPlaceholderConfigurer propertySourcesEnv() {
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
     }
 }

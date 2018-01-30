@@ -1,6 +1,5 @@
 package com.shares.biz.shared.shiro.token;
 
-import com.shares.biz.shared.shiro.token.manager.TokenManager;
 import com.shares.core.model.bo.SysUserBO;
 import com.shares.core.service.UserService;
 import org.apache.shiro.authc.*;

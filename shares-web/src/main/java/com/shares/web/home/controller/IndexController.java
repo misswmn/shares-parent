@@ -1,7 +1,6 @@
 package com.shares.web.home.controller;
 
 import com.shares.core.service.exception.ResultBean;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +19,6 @@ public class IndexController extends BaseController {
         return new ModelAndView("login");
     }
 
-    @RequiresPermissions(value = "main")
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView main(ModelMap modelMap) {
         return returnPage(modelMap, "home", null);

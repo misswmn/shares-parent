@@ -1,23 +1,23 @@
 package com.shares.web.home.app;
 
 import com.shares.biz.shared.shiro.CustomShiroSessionDAO;
+import com.shares.biz.shared.shiro.cache.CustomShiroCacheManager;
 import com.shares.biz.shared.shiro.filter.LoginFilter;
 import com.shares.biz.shared.shiro.token.DefaultRealm;
-import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
-import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import javax.servlet.Filter;
@@ -27,10 +27,24 @@ import java.util.Properties;
 
 /**
  * @author wangmn
- * @date 2017/8/6
+ * @description
+ * @date 2018/1/30 14:31
  */
 @Configuration
 public class ShiroConfig {
+
+    @Value("${cookie.name}")
+    private String cookieName;
+    @Value("${cookie.domain}")
+    private String cookieDomain;
+    @Value("${cookie.path}")
+    private String cookiePath;
+    @Value("${cookie.httpOnly}")
+    private boolean cookieHttpOnly;
+    @Value("${cookie.secure}")
+    private boolean cookieSecure;
+    @Value("${cookie.maxage}")
+    private int cookieMaxAge;
 
     @Bean
     public ShiroFilterFactoryBean shiroFilter() {
@@ -60,8 +74,13 @@ public class ShiroConfig {
         securityManager.setRealm(defaultRealm());
         securityManager.setSessionManager(sessionManager());
 //        securityManager.setRememberMeManager(rememberMeManager());
-//        securityManager.setCacheManager(null);
+        securityManager.setCacheManager(cacheManager());
         return securityManager;
+    }
+
+    @Bean
+    public CustomShiroCacheManager cacheManager() {
+        return new CustomShiroCacheManager();
     }
 
     @Bean
@@ -81,8 +100,12 @@ public class ShiroConfig {
     @Bean
     public SimpleCookie cookie() {
         SimpleCookie cookie = new SimpleCookie();
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(-1);
+        cookie.setName(cookieName);
+        cookie.setDomain(cookieDomain);
+        cookie.setPath(cookiePath);
+        cookie.setHttpOnly(cookieHttpOnly);
+        cookie.setSecure(cookieSecure);
+        cookie.setMaxAge(cookieMaxAge);
         return cookie;
     }
 
@@ -110,26 +133,26 @@ public class ShiroConfig {
     public JavaUuidSessionIdGenerator sessionIdGenerator() {
         return new JavaUuidSessionIdGenerator();
     }
-
-    @Bean
-    public CookieRememberMeManager rememberMeManager() {
-        CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
-        rememberMeManager.setCipherKey(Base64.decode("fuck"));
-        rememberMeManager.setCookie(rememberMeCookie());
-        return rememberMeManager;
-    }
-
-    /**
-     * 用户信息记住我功能的相关配置
-     */
-    @Bean
-    public SimpleCookie rememberMeCookie() {
-        SimpleCookie cookie = new SimpleCookie("v_v-re-baidu");
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(30 * 24 * 3600);
-        return cookie;
-    }
-
+//
+//    @Bean
+//    public CookieRememberMeManager rememberMeManager() {
+//        CookieRememberMeManager rememberMeManager = new CookieRememberMeManager();
+//        rememberMeManager.setCipherKey(Base64.decode("fuck"));
+//        rememberMeManager.setCookie(rememberMeCookie());
+//        return rememberMeManager;
+//    }
+//
+//    /**
+//     * 用户信息记住我功能的相关配置
+//     */
+//    @Bean
+//    public SimpleCookie rememberMeCookie() {
+//        SimpleCookie cookie = new SimpleCookie("v_v-re-baidu");
+//        cookie.setHttpOnly(true);
+//        cookie.setMaxAge(30 * 24 * 3600);
+//        return cookie;
+//    }
+//
     @Bean
     public Realm defaultRealm() {
         return new DefaultRealm();
@@ -138,11 +161,6 @@ public class ShiroConfig {
     @Bean
     public LoginFilter loginFilter() {
         return new LoginFilter();
-    }
-
-    @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        return new LifecycleBeanPostProcessor();
     }
 
     @Bean
@@ -155,6 +173,7 @@ public class ShiroConfig {
 
     /** support shiro annotation */
     @Bean
+    @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator autoProxyCreator() {
         DefaultAdvisorAutoProxyCreator autoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         autoProxyCreator.setProxyTargetClass(true);
