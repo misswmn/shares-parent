@@ -4,10 +4,8 @@ import com.shares.biz.shared.shiro.CustomShiroSessionDAO;
 import com.shares.biz.shared.shiro.cache.CustomShiroCacheManager;
 import com.shares.biz.shared.shiro.filter.LoginFilter;
 import com.shares.biz.shared.shiro.token.DefaultRealm;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
-import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
@@ -18,12 +16,11 @@ import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * @author wangmn
@@ -50,8 +47,8 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilter() {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager());
-//        shiroFilter.setLoginUrl("/");
-//        shiroFilter.setSuccessUrl("/main");
+        shiroFilter.setLoginUrl("/login");
+        shiroFilter.setSuccessUrl("/page/main");
         shiroFilter.setUnauthorizedUrl("/lack/permission");
         shiroFilter.setFilterChainDefinitionMap(getFilterChainDefinitions());
         Map<String, Filter> filterMap = new HashMap<>();
@@ -61,15 +58,16 @@ public class ShiroConfig {
     }
 
     private Map<String, String> getFilterChainDefinitions() {
-        Map<String, String> filterChainMap = new HashMap<>();
-        filterChainMap.put("/", "anon");
+        Map<String, String> filterChainMap = new LinkedHashMap<>();
+        filterChainMap.put("/login", "anon");
         filterChainMap.put("/user/login", "anon");
+        filterChainMap.put("/system/**", "anon");
         filterChainMap.put("/**", "authc");
         return filterChainMap;
     }
 
     @Bean
-    public SecurityManager securityManager() {
+    public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(defaultRealm());
         securityManager.setSessionManager(sessionManager());
@@ -91,7 +89,7 @@ public class ShiroConfig {
         sessionManager.setSessionDAO(customShiroSessionDAO());
 //        sessionManager.setSessionListeners(Arrays.asList(customSessionListener()));
 //        sessionManager.setSessionValidationScheduler(serviceSessionValidationScheduler());
-        sessionManager.setSessionValidationSchedulerEnabled(true);
+        sessionManager.setSessionValidationSchedulerEnabled(false);
         sessionManager.setDeleteInvalidSessions(true);
         sessionManager.setSessionIdCookie(cookie());
         return sessionManager;
@@ -180,19 +178,4 @@ public class ShiroConfig {
         return autoProxyCreator;
     }
 
-    @Bean
-    public AuthorizationAttributeSourceAdvisor advisor() {
-        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
-        advisor.setSecurityManager(securityManager());
-        return advisor;
-    }
-
-    @Bean
-    public SimpleMappingExceptionResolver resolver() {
-        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
-        Properties exceptionMappings = new Properties();
-        exceptionMappings.put("org.apache.shiro.authz.UnauthorizedException", "/lack/permission");
-        resolver.setExceptionMappings(exceptionMappings);
-        return resolver;
-    }
 }

@@ -40,6 +40,6 @@ public class LoginBusinessImpl implements LoginBusiness {
         if (savedRequest != null) {
             return savedRequest.getRequestUrl();
         }
-        return "main";
+        return "page/main";
     }
 }

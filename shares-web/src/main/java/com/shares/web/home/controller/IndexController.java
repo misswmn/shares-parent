@@ -14,13 +14,21 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class IndexController extends BaseController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView index() {
         return new ModelAndView("login");
     }
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public ModelAndView main(ModelMap modelMap) {
+    /**
+     * 通用页面跳转
+     * @author ex-wangmengnan
+     * @description
+     * @param modelMap
+     * @date 2018/1/31 17:45
+     */
+    @RequestMapping(value = "/page/main", method = RequestMethod.GET)
+    public ModelAndView toPage(ModelMap modelMap) {
+
         return returnPage(modelMap, "home", null);
     }
 

@@ -1,7 +1,11 @@
 package com.shares.web.home.app;
 
+import com.shares.web.home.interceptor.AuthorInterceptor;
 import freemarker.template.utility.XmlEscape;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.hibernate.validator.HibernateValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,10 +14,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
@@ -110,5 +112,31 @@ public class WebmvcConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("system/js/**").addResourceLocations("/system/js/");
         registry.addResourceHandler("system/css/**").addResourceLocations("/system/css/");
+        registry.addResourceHandler("system/images/**").addResourceLocations("/system/images/");
+        registry.addResourceHandler("system/bootstrap/**").addResourceLocations("/system/bootstrap/");
+        registry.addResourceHandler("/WEB-INF/ftl/**").addResourceLocations("/WEB-INF/ftl/");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new AuthorInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/user/login");
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor advisor(@Autowired SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
+        advisor.setSecurityManager(securityManager);
+        return advisor;
+    }
+
+    @Bean
+    public SimpleMappingExceptionResolver resolver() {
+        SimpleMappingExceptionResolver resolver = new SimpleMappingExceptionResolver();
+        Properties exceptionMappings = new Properties();
+        exceptionMappings.put("org.apache.shiro.authz.UnauthorizedException", "/lack/permission");
+        resolver.setExceptionMappings(exceptionMappings);
+        return resolver;
     }
 }

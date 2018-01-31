@@ -29,12 +29,12 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[]{encodingFilter()};
+        return new Filter[]{encodingFilter(), new DelegatingFilterProxy("shiroFilter")};
     }
 
     @Override
     protected String getServletName() {
-        return "orange";
+        return "shares";
     }
 
     private CharacterEncodingFilter encodingFilter() {
