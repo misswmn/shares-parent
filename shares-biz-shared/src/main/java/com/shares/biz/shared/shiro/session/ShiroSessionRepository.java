@@ -34,4 +34,13 @@ public interface ShiroSessionRepository {
      * @return
      */
     Collection<Session> getAllSessions();
+
+    /**
+     * 更新session
+     * @author ex-wangmengnan
+     * @description
+     * @param session
+     * @date 2018/2/1 17:48
+     */
+    void update(Session session);
 }

@@ -1,6 +1,5 @@
 package com.shares.web.home.app;
 
-import com.shares.web.home.interceptor.AuthorInterceptor;
 import freemarker.template.utility.XmlEscape;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -116,13 +115,6 @@ public class WebmvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("system/images/**").addResourceLocations("/system/images/");
         registry.addResourceHandler("system/bootstrap/**").addResourceLocations("/system/bootstrap/");
         registry.addResourceHandler("/WEB-INF/ftl/**").addResourceLocations("/WEB-INF/ftl/");
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthorInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/login")
-                .excludePathPatterns("/user/login");
     }
 
     @Bean

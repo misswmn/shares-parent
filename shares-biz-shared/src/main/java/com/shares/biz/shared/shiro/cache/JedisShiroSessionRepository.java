@@ -1,6 +1,5 @@
 package com.shares.biz.shared.shiro.cache;
 
-import com.shares.biz.shared.shiro.session.SessionStatus;
 import com.shares.biz.shared.shiro.session.ShiroSessionRepository;
 import com.shares.common.service.facade.enums.ResponseEnum;
 import com.shares.core.model.bo.ConstantsBO;
@@ -25,17 +24,11 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
 
     @Override
     public void saveSession(Session session) {
-        if (session == null || session.getId() == null) {
+        if (session == null || session.getId() == null)
             throw new ServiceException(ResponseEnum.ILLEGAL_PARAM, "session is null");
-        }
-        if (session.getAttribute(ConstantsBO.Session.SHARES_SESSION_STATUS) == null) {
-            SessionStatus sessionStatus = new SessionStatus();
-            session.setAttribute(ConstantsBO.Session.SHARES_SESSION_STATUS, sessionStatus);
-        }
         String sessionKey = buildRedisSessionKey(session.getId());
-        long sessionTimeout = session.getTimeout() / 1000;
         ValueOperations<String, Session> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(sessionKey, session, sessionTimeout, TimeUnit.SECONDS);
+        valueOperations.set(sessionKey, session, session.getTimeout(), TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -53,6 +46,11 @@ public class JedisShiroSessionRepository implements ShiroSessionRepository {
     @Override
     public Collection<Session> getAllSessions() {
         return null;
+    }
+
+    @Override
+    public void update(Session session) {
+        this.saveSession(session);
     }
 
     private String buildRedisSessionKey(Serializable id) {

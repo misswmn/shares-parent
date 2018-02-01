@@ -28,7 +28,7 @@ public class CustomShiroSessionDAO extends AbstractSessionDAO {
 
     @Override
     public void update(Session session) throws UnknownSessionException {
-
+        jedisShiroSessionRepository.update(session);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.shares.biz.shared.base.Business;
 import com.shares.biz.shared.shiro.token.manager.TokenManager;
 import com.shares.common.service.facade.dto.SysUserParamDTO;
 import com.shares.common.service.facade.enums.ResponseEnum;
+import com.shares.common.util.JsonUtils;
 import com.shares.core.model.bo.ConstantsBO;
 import com.shares.core.service.exception.ServiceException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -30,7 +31,7 @@ public class LoginBusinessImpl implements LoginBusiness {
             Session session = TokenManager.getSession();
             LOGGER.info("{}", session.getId());
             TokenManager.login(user);
-            session.setAttribute(ConstantsBO.Session.SHARES_SESSION_STATUS, TokenManager.getUserId());
+            session.setAttribute(ConstantsBO.Session.SHARES_SESSION_STATUS, JsonUtils.objectToJson(TokenManager.getCurrentUser()));
         } catch (IncorrectCredentialsException e){
             throw new ServiceException(ResponseEnum.USERNAME_PWD_ERROR);
         } catch (AuthenticationException e) {
