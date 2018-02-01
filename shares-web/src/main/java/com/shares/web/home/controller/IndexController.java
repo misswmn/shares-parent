@@ -26,7 +26,7 @@ public class IndexController extends BaseController {
      * @param modelMap
      * @date 2018/1/31 17:45
      */
-    @RequestMapping(value = "/page/main", method = RequestMethod.GET)
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
     public ModelAndView toPage(ModelMap modelMap) {
 
         return returnPage(modelMap, "home", null);

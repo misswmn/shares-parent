@@ -78,7 +78,7 @@
 
             shareshttp.login(data, function (data) {
                 if (data.code === 0) {
-                    location.href = data.content ? ${base}/ + data.content : ${base}/;
+                    shareshttp.toHome();
                 } else {
                     $error.html(data.message || "登录失败");
                     $("#username").focus();

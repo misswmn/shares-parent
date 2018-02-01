@@ -32,6 +32,9 @@
         },
         login: function (data, cb) {
             this.post(url.login, data, cb);
+        },
+        toHome: function () {
+            location.href = domain + "/main";
         }
     };
 });
