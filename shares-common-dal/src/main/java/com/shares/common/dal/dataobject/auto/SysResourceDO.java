@@ -9,15 +9,17 @@ public class SysResourceDO {
 
     private String resName;
 
-    private String parentCode;
+    private String resUrl;
 
-    private String icon;
+    private String parentCode;
 
     private String resDesc;
 
+    private String resIcon;
+
     private String resType;
 
-    private Integer sequence;
+    private Long sequence;
 
     private String creator;
 
@@ -55,20 +57,20 @@ public class SysResourceDO {
         this.resName = resName == null ? null : resName.trim();
     }
 
+    public String getResUrl() {
+        return resUrl;
+    }
+
+    public void setResUrl(String resUrl) {
+        this.resUrl = resUrl == null ? null : resUrl.trim();
+    }
+
     public String getParentCode() {
         return parentCode;
     }
 
     public void setParentCode(String parentCode) {
         this.parentCode = parentCode == null ? null : parentCode.trim();
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon == null ? null : icon.trim();
     }
 
     public String getResDesc() {
@@ -79,6 +81,14 @@ public class SysResourceDO {
         this.resDesc = resDesc == null ? null : resDesc.trim();
     }
 
+    public String getResIcon() {
+        return resIcon;
+    }
+
+    public void setResIcon(String resIcon) {
+        this.resIcon = resIcon == null ? null : resIcon.trim();
+    }
+
     public String getResType() {
         return resType;
     }
@@ -87,11 +97,11 @@ public class SysResourceDO {
         this.resType = resType == null ? null : resType.trim();
     }
 
-    public Integer getSequence() {
+    public Long getSequence() {
         return sequence;
     }
 
-    public void setSequence(Integer sequence) {
+    public void setSequence(Long sequence) {
         this.sequence = sequence;
     }
 

@@ -5,13 +5,9 @@ import java.util.Date;
 public class SysUserRoleDO {
     private Long seqId;
 
-    private Long userId;
+    private String userId;
 
     private String roleCode;
-
-    private String creator;
-
-    private String updater;
 
     private String isDelete;
 
@@ -29,12 +25,12 @@ public class SysUserRoleDO {
         this.seqId = seqId;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
     public String getRoleCode() {
@@ -43,22 +39,6 @@ public class SysUserRoleDO {
 
     public void setRoleCode(String roleCode) {
         this.roleCode = roleCode == null ? null : roleCode.trim();
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
-    }
-
-    public String getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(String updater) {
-        this.updater = updater == null ? null : updater.trim();
     }
 
     public String getIsDelete() {

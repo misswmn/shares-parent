@@ -2,6 +2,7 @@ package com.shares.web.home.controller;
 
 import com.shares.core.service.exception.ResultBean;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,21 +20,18 @@ public class IndexController extends BaseController {
         return new ModelAndView("login");
     }
 
-    /**
-     * 通用页面跳转
-     * @author ex-wangmengnan
-     * @description
-     * @param modelMap
-     * @date 2018/1/31 17:45
-     */
     @RequestMapping(value = "/main", method = RequestMethod.GET)
-    public ModelAndView toPage(ModelMap modelMap) {
-
+    public ModelAndView main(ModelMap modelMap) {
         return returnPage(modelMap, "home", null);
     }
 
     @RequestMapping(value = "/lack/permission", method = RequestMethod.GET)
     public ResultBean userNoPermission() {
         return ResultBean.format("抱歉你没有操作权限");
+    }
+
+    @RequestMapping(value = "/page/{page}", method = RequestMethod.GET)
+    public ModelAndView page(@PathVariable String page, ModelMap modelMap) {
+        return returnPage(modelMap, page, null);
     }
 }

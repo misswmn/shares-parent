@@ -15,7 +15,7 @@ public class SysUserDO {
 
     private String address;
 
-    private Integer status;
+    private String status;
 
     private String isDelete;
 
@@ -73,12 +73,12 @@ public class SysUserDO {
         this.address = address == null ? null : address.trim();
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getIsDelete() {

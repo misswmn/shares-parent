@@ -56,5 +56,10 @@
 			   enableDeleteByExample="true" enableSelectByExample="true"
 			   selectByExampleQueryId="true">
 		</table>
+		<table tableName="sys_role" domainObjectName="SysRoleDO"
+			   enableCountByExample="true" enableUpdateByExample="true"
+			   enableDeleteByExample="true" enableSelectByExample="true"
+			   selectByExampleQueryId="true">
+		</table>
 	</context>
 </generatorConfiguration>

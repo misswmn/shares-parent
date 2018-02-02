@@ -525,52 +525,62 @@ public class SysUserDOExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Integer value) {
+        public Criteria andStatusEqualTo(String value) {
             addCriterion("STATUS =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Integer value) {
+        public Criteria andStatusNotEqualTo(String value) {
             addCriterion("STATUS <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Integer value) {
+        public Criteria andStatusGreaterThan(String value) {
             addCriterion("STATUS >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStatusGreaterThanOrEqualTo(String value) {
             addCriterion("STATUS >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Integer value) {
+        public Criteria andStatusLessThan(String value) {
             addCriterion("STATUS <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+        public Criteria andStatusLessThanOrEqualTo(String value) {
             addCriterion("STATUS <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Integer> values) {
+        public Criteria andStatusLike(String value) {
+            addCriterion("STATUS like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotLike(String value) {
+            addCriterion("STATUS not like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<String> values) {
             addCriterion("STATUS in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Integer> values) {
+        public Criteria andStatusNotIn(List<String> values) {
             addCriterion("STATUS not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Integer value1, Integer value2) {
+        public Criteria andStatusBetween(String value1, String value2) {
             addCriterion("STATUS between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+        public Criteria andStatusNotBetween(String value1, String value2) {
             addCriterion("STATUS not between", value1, value2, "status");
             return (Criteria) this;
         }

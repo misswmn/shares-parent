@@ -1,11 +1,11 @@
 package com.shares.web.home.controller;
 
 import com.shares.biz.shared.LoginBusiness;
+import com.shares.biz.shared.PermissionSupportBusiness;
 import com.shares.biz.shared.UserBusiness;
-import com.shares.biz.shared.shiro.token.manager.TokenManager;
 import com.shares.common.service.facade.dto.SysUserParamDTO;
+import com.shares.common.service.facade.dto.page.PageRequestDTO;
 import com.shares.core.service.exception.ResultBean;
-import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 /**
  * Created by misswmn on 2017/4/8.
@@ -30,14 +29,17 @@ public class UserController {
     private UserBusiness userBusiness;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResultBean login(HttpServletRequest request, @Valid SysUserParamDTO user, BindingResult result) {
+    public ResultBean login(HttpServletRequest request, SysUserParamDTO user, BindingResult result) {
         return ResultBean.format(loginBusiness.login(request, user));
     }
 
     @RequestMapping(value = "/list")
-    public ResultBean list(HttpServletRequest request, @Valid SysUserParamDTO user, BindingResult result) {
-        Session session = TokenManager.getSession();
-        LOGGER.info("{}", session.getId());
-        return ResultBean.format(userBusiness.listUser(null));
+    public ResultBean list(PageRequestDTO<SysUserParamDTO> requestDTO, BindingResult result) {
+        return ResultBean.format(userBusiness.listUser(requestDTO));
+    }
+
+    @RequestMapping(value = "/role")
+    public ResultBean listRole(PageRequestDTO<SysUserParamDTO> requestDTO, BindingResult result) {
+        return ResultBean.format(userBusiness.listUser(requestDTO));
     }
 }

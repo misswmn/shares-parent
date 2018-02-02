@@ -1,6 +1,9 @@
 ;$(function () {
     var domain = "http://mreagle.cn:8080/shares";
-    var url = {"login": "/user/login"};
+    var url = {
+        "login": "/user/login",
+        "home": "/main"
+    };
     window.shareshttp = {
         post: function (url, data, cb) {
             var path = this.getPath(url);
@@ -20,9 +23,7 @@
                     }
                 }, function (xhr) {
                     alert("网络错误");
-                    reject({
-                        xhr: xhr
-                    });
+                    reject(xhr);
                 }).always(function () {
                 $("body").mLoading("hide");
             });
@@ -34,7 +35,7 @@
             this.post(url.login, data, cb);
         },
         toHome: function () {
-            location.href = domain + "/main";
+            location.href = this.getPath(url.home);
         }
     };
 });

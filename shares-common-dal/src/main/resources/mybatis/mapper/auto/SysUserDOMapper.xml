@@ -8,7 +8,7 @@
     <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
     <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
     <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
-    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
     <result column="IS_DELETE" property="isDelete" jdbcType="CHAR" />
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
@@ -114,7 +114,7 @@
       UPDATE_TIME, COMMENTS)
     values (#{seqId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{isDelete,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=CHAR}, #{isDelete,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{comments,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.shares.common.dal.dataobject.auto.SysUserDO" >
@@ -174,7 +174,7 @@
         #{address,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+        #{status,jdbcType=CHAR},
       </if>
       <if test="isDelete != null" >
         #{isDelete,jdbcType=CHAR},
@@ -218,7 +218,7 @@
         ADDRESS = #{record.address,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null" >
-        STATUS = #{record.status,jdbcType=INTEGER},
+        STATUS = #{record.status,jdbcType=CHAR},
       </if>
       <if test="record.isDelete != null" >
         IS_DELETE = #{record.isDelete,jdbcType=CHAR},
@@ -245,7 +245,7 @@
       PASSWORD = #{record.password,jdbcType=VARCHAR},
       MOBILE = #{record.mobile,jdbcType=VARCHAR},
       ADDRESS = #{record.address,jdbcType=VARCHAR},
-      STATUS = #{record.status,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=CHAR},
       IS_DELETE = #{record.isDelete,jdbcType=CHAR},
       CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -273,7 +273,7 @@
         ADDRESS = #{address,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        STATUS = #{status,jdbcType=INTEGER},
+        STATUS = #{status,jdbcType=CHAR},
       </if>
       <if test="isDelete != null" >
         IS_DELETE = #{isDelete,jdbcType=CHAR},
@@ -297,7 +297,7 @@
       PASSWORD = #{password,jdbcType=VARCHAR},
       MOBILE = #{mobile,jdbcType=VARCHAR},
       ADDRESS = #{address,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=CHAR},
       IS_DELETE = #{isDelete,jdbcType=CHAR},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},

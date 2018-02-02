@@ -2,12 +2,18 @@ package com.shares.common.dal.dataobject.auto;
 
 import java.util.Date;
 
-public class SysRoleResourceDO {
+public class SysRoleDO {
     private Long seqId;
 
     private String roleCode;
 
-    private String resCode;
+    private String roleName;
+
+    private String roleDesc;
+
+    private String creator;
+
+    private String updater;
 
     private String isDelete;
 
@@ -33,12 +39,36 @@ public class SysRoleResourceDO {
         this.roleCode = roleCode == null ? null : roleCode.trim();
     }
 
-    public String getResCode() {
-        return resCode;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setResCode(String resCode) {
-        this.resCode = resCode == null ? null : resCode.trim();
+    public void setRoleName(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
+    }
+
+    public String getRoleDesc() {
+        return roleDesc;
+    }
+
+    public void setRoleDesc(String roleDesc) {
+        this.roleDesc = roleDesc == null ? null : roleDesc.trim();
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator == null ? null : creator.trim();
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater == null ? null : updater.trim();
     }
 
     public String getIsDelete() {
