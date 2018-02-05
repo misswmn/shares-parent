@@ -8,7 +8,12 @@ import com.shares.common.dal.dataobject.auto.SysUserDOExample;
 import com.shares.common.dal.plugin.common.model.PageRequest;
 import com.shares.common.dal.plugin.common.model.PageResult;
 import com.shares.common.dal.plugin.common.repository.PageRepository;
-import com.shares.core.model.bo.*;
+import com.shares.core.model.bo.ClientBO;
+import com.shares.core.model.bo.SampleBO;
+import com.shares.core.model.bo.SimpleBO;
+import com.shares.core.model.bo.SysUserBO;
+import com.shares.core.model.bo.UserParamBO;
+import com.shares.core.model.bo.UserPasswordBO;
 import com.shares.core.model.enums.IsDeleteEnum;
 import com.shares.core.service.UserService;
 import com.shares.core.service.base.BeanServiceUtil;
@@ -89,11 +94,5 @@ public class UserServiceImpl implements UserService {
         SysUserBO sysUserBO = new SysUserBO();
         BeanUtils.copyProperties(sysUserDO, sysUserBO);
         return sysUserBO;
-    }
-
-    @Override
-    public List<String> getPermissions(String userId) {
-        List<String> permissions = sysUserInfoDOMapper.getPermissions(userId);
-        return null;
     }
 }

@@ -42,4 +42,49 @@
             </if>
         </if>
     </sql>
+
+
+    <resultMap id="SysUserResourceMap" type="com.shares.common.dal.dataobject.SysUserResourceInfoDO" >
+        <result column="RES_CODE" property="resCode" jdbcType="VARCHAR" />
+        <result column="RES_NAME" property="resName" jdbcType="VARCHAR" />
+        <result column="RES_URL" property="resUrl" jdbcType="VARCHAR" />
+        <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
+        <result column="RES_DESC" property="resDesc" jdbcType="VARCHAR" />
+        <result column="RES_ICON" property="resIcon" jdbcType="VARCHAR" />
+        <result column="RES_TYPE" property="resType" jdbcType="VARCHAR" />
+        <result column="SEQUENCE" property="sequence" jdbcType="BIGINT" />
+    </resultMap>
+
+    <select id="getMenuTree" resultMap="SysUserResourceMap"
+            parameterType="java.lang.String">
+        SELECT
+            a.RES_CODE,
+            a.RES_NAME,
+            a.RES_URL,
+            a.PARENT_CODE,
+            a.RES_DESC,
+            a.RES_ICON,
+            a.RES_TYPE,
+            a.SEQUENCE,
+            e.USER_ID,
+            e.USERNAME
+        FROM
+            sys_resource a,
+            sys_role_resource b,
+            sys_role c,
+            sys_user_role d,
+            sys_user e
+        WHERE
+          e.USER_ID = #{userId}
+        AND a.RES_CODE = b.RES_CODE
+        AND b.ROLE_CODE = c.ROLE_CODE
+        AND c.ROLE_CODE = d.ROLE_CODE
+        AND d.USER_ID = e.USER_ID
+        AND a.IS_DELETE = 'N'
+        AND b.IS_DELETE = 'N'
+        AND c.IS_DELETE = 'N'
+        AND d.IS_DELETE = 'N'
+        AND e.IS_DELETE = 'N'
+    </select>
+
 </mapper>

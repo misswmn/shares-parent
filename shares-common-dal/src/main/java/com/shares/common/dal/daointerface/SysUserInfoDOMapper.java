@@ -1,5 +1,6 @@
 package com.shares.common.dal.daointerface;
 
+import com.shares.common.dal.dataobject.SysUserResourceInfoDO;
 import com.shares.common.dal.dataobject.auto.SysUserDO;
 import com.shares.common.dal.plugin.common.model.PageRequest;
 
@@ -13,5 +14,5 @@ import java.util.List;
 public interface SysUserInfoDOMapper {
     List<SysUserDO> listUserByPage(PageRequest<SysUserDO> request);
 
-    List<String> getPermissions(String userId);
+    List<SysUserResourceInfoDO> getMenuTree(String userId);
 }

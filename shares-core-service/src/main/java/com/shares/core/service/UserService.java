@@ -2,13 +2,17 @@ package com.shares.core.service;
 
 import com.shares.common.dal.plugin.common.model.PageRequest;
 import com.shares.common.dal.plugin.common.model.PageResult;
-import com.shares.core.model.bo.*;
+import com.shares.core.model.bo.ClientBO;
+import com.shares.core.model.bo.SampleBO;
+import com.shares.core.model.bo.SimpleBO;
+import com.shares.core.model.bo.SysUserBO;
+import com.shares.core.model.bo.UserParamBO;
+import com.shares.core.model.bo.UserPasswordBO;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * @author wangmn
@@ -33,14 +37,4 @@ public interface UserService {
 
     SysUserBO login(@NotNull(message = "{common.param.illegal}") String username,
                     @NotNull(message = "{common.param.illegal}") String password);
-
-    /**
-     * 获取用户权限
-     *
-     * @param userId
-     * @author ex-wangmengnan
-     * @description
-     * @date 2018/1/25 16:22
-     */
-    List<String> getPermissions(String userId);
 }

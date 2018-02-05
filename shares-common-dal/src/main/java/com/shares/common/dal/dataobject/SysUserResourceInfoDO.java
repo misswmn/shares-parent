@@ -1,22 +1,26 @@
-package com.shares.core.model.bo;
-
-import java.util.List;
+package com.shares.common.dal.dataobject;
 
 /**
  * @author wangmn
  * @description
- * @date 2018/2/2 15:48
+ * @date 2018/2/5 11:26
  */
-public class SysUserResourceBO {
-
+public class SysUserResourceInfoDO {
     private String resCode;
+
     private String resName;
+
     private String resUrl;
+
     private String parentCode;
+
     private String resDesc;
+
     private String resIcon;
+
     private String resType;
-    private List<SysUserResourceBO> childNodes;
+
+    private Long sequence;
 
     public String getResCode() {
         return resCode;
@@ -74,11 +78,11 @@ public class SysUserResourceBO {
         this.resType = resType;
     }
 
-    public List<SysUserResourceBO> getChildNodes() {
-        return childNodes;
+    public Long getSequence() {
+        return sequence;
     }
 
-    public void setChildNodes(List<SysUserResourceBO> childNodes) {
-        this.childNodes = childNodes;
+    public void setSequence(Long sequence) {
+        this.sequence = sequence;
     }
 }

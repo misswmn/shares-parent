@@ -1,8 +1,6 @@
 package com.shares.core.service;
 
-import com.shares.core.model.bo.SysUserResourceBO;
-
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author wangmn
@@ -19,5 +17,7 @@ public interface ResourceCoreService {
      * @description
      * @date 2018/2/2 15:52
      */
-    List<SysUserResourceBO> getUserResource(String userId);
+    String getMenuTree(String userId);
+
+    Set<String> getResourceSet(String userId);
 }

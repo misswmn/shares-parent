@@ -1,4 +1,3 @@
-<#--
 <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true"
     data-slide-speed="200" style="padding-top: 20px">
     <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element &ndash;&gt;
@@ -27,7 +26,7 @@
                                         </span>
             </div>
         </form>
-        <!-- END RESPONSIVE QUICK SEARCH FORM &ndash;&gt;
+        <!-- END RESPONSIVE QUICK SEARCH FORM -->
     </li>
 
     <li class="nav-item  ">
@@ -416,13 +415,38 @@
             </li>
         </ul>
     </li>
-</ul>-->
+</ul>
 
 
-
-<#assign menu_data = sysUtil.getUserResource() />
+<#assign base=request.contextPath />
 <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true"
     data-slide-speed="200" style="padding-top: 20px">
 
+    <#macro menuList menuId menudata>
+        <#if menudata.childNodes?exists>
+            <li class="nav_item ">
+                <a href="#" class="nav-link nav-toggle">
+                    <i class="${menudata.resIcon!''}"></i>
+                    <span class="title">${menudata.resName}</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <#list menudata.childNodes as menu>
+                        <@menuList menuId=menuId menudata=menu />
+                    </#list>
+                </ul>
+            </li>
+        <#else>
+            <li class="nav-item  ">
+                <a href="#" class="nav-link ">
+                    <i class="${menudata.resIcon!''}"></i>
+                    <span class="title">${menudata.resName}</span>
+                </a>
+            </li>
+        </#if>
+    </#macro>
 
+    <#list menuTree as menu>
+        <@menuList menuId='' menudata=menu></@menuList>
+    </#list>
 </ul>

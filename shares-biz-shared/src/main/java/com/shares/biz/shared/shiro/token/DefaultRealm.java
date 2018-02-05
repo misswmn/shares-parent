@@ -1,6 +1,7 @@
 package com.shares.biz.shared.shiro.token;
 
 import com.shares.core.model.bo.SysUserBO;
+import com.shares.core.service.ResourceCoreService;
 import com.shares.core.service.UserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.inject.Inject;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +29,8 @@ public class DefaultRealm extends AuthorizingRealm {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultRealm.class);
     @Autowired
     private UserService userService;
+    @Inject
+    private ResourceCoreService resourceCoreService;
 
     public DefaultRealm() {
         super();
@@ -39,7 +43,7 @@ public class DefaultRealm extends AuthorizingRealm {
             return null;
         }
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        Set<String> permissions = new HashSet<>(userService.getPermissions(userBO.getUserId()));
+        Set<String> permissions = new HashSet<>(resourceCoreService.getResourceSet(userBO.getUserId()));
         authorizationInfo.setStringPermissions(permissions);
         return authorizationInfo;
     }

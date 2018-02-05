@@ -19,3 +19,16 @@ INSERT INTO `sys_resource`(`RES_CODE`,`RES_NAME`,`RES_URL`,`PARENT_CODE`,`RES_DE
 INSERT INTO `sys_resource`(`RES_CODE`,`RES_NAME`,`RES_URL`,`PARENT_CODE`,`RES_DESC`,`RES_ICON`,`RES_TYPE`,`SEQUENCE`,`CREATOR`,`UPDATER`,`IS_DELETE`,`CREATE_TIME`,`UPDATE_TIME`,`COMMENTS`) VALUES ('role:list','角色列表','role/list','role','角色列表',NULL,'MENU',8,'SYSTEM','SYSTEM','N',NOW(),NULL,NULL);
 INSERT INTO `sys_resource`(`RES_CODE`,`RES_NAME`,`RES_URL`,`PARENT_CODE`,`RES_DESC`,`RES_ICON`,`RES_TYPE`,`SEQUENCE`,`CREATOR`,`UPDATER`,`IS_DELETE`,`CREATE_TIME`,`UPDATE_TIME`,`COMMENTS`) VALUES ('role:add','新增角色','role/add','role:list','新增角色',NULL,'BUTTON',9,'SYSTEM','SYSTEM','N',NOW(),NULL,NULL);
 INSERT INTO `sys_resource`(`RES_CODE`,`RES_NAME`,`RES_URL`,`PARENT_CODE`,`RES_DESC`,`RES_ICON`,`RES_TYPE`,`SEQUENCE`,`CREATOR`,`UPDATER`,`IS_DELETE`,`CREATE_TIME`,`UPDATE_TIME`,`COMMENTS`) VALUES ('role:detail','角色详情','role/detail','role:list','角色详情',NULL,'BUTTON',10,'SYSTEM','SYSTEM','N',NOW(),NULL,NULL);
+
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','home','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','user','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','user:list','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','user:add','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','user:detail','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','user:update','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','role','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','role:list','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','role:add','N',NOW());
+INSERT INTO `sys_role_resource`(ROLE_CODE,RES_CODE,IS_DELETE,CREATE_TIME) VALUES ('admin','role:detail','N',NOW());
+
+INSERT INTO `sys_user_role` (USER_ID,ROLE_CODE,IS_DELETE,CREATE_TIME) VALUES ('1','admin','N',NOW());

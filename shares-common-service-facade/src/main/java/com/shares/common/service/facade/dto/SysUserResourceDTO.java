@@ -1,14 +1,15 @@
-package com.shares.core.model.bo;
+package com.shares.common.service.facade.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author wangmn
  * @description
- * @date 2018/2/2 15:48
+ * @date 2018/2/5 11:05
  */
-public class SysUserResourceBO {
-
+public class SysUserResourceDTO implements Serializable {
+    private static final long serialVersionUID = -9149354338670527905L;
     private String resCode;
     private String resName;
     private String resUrl;
@@ -16,7 +17,7 @@ public class SysUserResourceBO {
     private String resDesc;
     private String resIcon;
     private String resType;
-    private List<SysUserResourceBO> childNodes;
+    private List<SysUserResourceDTO> childNodes;
 
     public String getResCode() {
         return resCode;
@@ -74,11 +75,11 @@ public class SysUserResourceBO {
         this.resType = resType;
     }
 
-    public List<SysUserResourceBO> getChildNodes() {
+    public List<SysUserResourceDTO> getChildNodes() {
         return childNodes;
     }
 
-    public void setChildNodes(List<SysUserResourceBO> childNodes) {
+    public void setChildNodes(List<SysUserResourceDTO> childNodes) {
         this.childNodes = childNodes;
     }
 }
