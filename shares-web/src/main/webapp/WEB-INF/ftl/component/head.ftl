@@ -15,7 +15,7 @@
     <link href="${base}/assets/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
-    <link href="${base}/assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>
+    <#--<link href="${base}/assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>-->
     <link href="${base}/assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="${base}/assets/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
@@ -65,4 +65,4 @@
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
-
+            <#include "crumb.ftl">

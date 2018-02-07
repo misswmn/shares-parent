@@ -26,7 +26,12 @@
 <div class="content">
     <form id="login-form" action="login" method="post" role="login">
         <h3 class="form-title">Login to your account</h3>
-        <div class="error"><span></span></div>
+        <div class="alert alert-danger display-hide error">
+            <button class="close" data-close="alert"></button>
+            <span>
+
+			</span>
+        </div>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">Username</label>
@@ -63,7 +68,6 @@
 <script src="${base}/assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="${base}/assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
 <script src="${base}/assets/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -73,7 +77,7 @@
 <script type="text/javascript" src="${base}/system/js/jquery.mloading.js"></script>
 <script type="text/javascript" src="${base}/system/js/MD5.js"></script>
 <#--<script type="text/javascript" src="system/js/global.js"></script>-->
-<script type="text/javascript" src="${base}/system/js/shareshttp.js"></script>
+<script type="text/javascript" src="${base}/system/js/shares.js"></script>
 <script>
     jQuery(document).ready(function () {
         App.init();
@@ -95,20 +99,16 @@
             var username = $("#username").val();
             var password = $("#password").val();
             var $error = $(".error");
-            if (username === '') {
-                $error.fadeOut("fast", function () {
-                    $error.css("top", "27px").show();
-                });
+            if (!username) {
                 $error.fadeIn("fast", function () {
+                    $error.css("top", "27px").find("span").html("请输入用户名");
                     $("#username").focus();
                 });
                 return false;
             }
-            if (password === '') {
-                $error.fadeOut('fast', function () {
-                    $error.css('top', '96px').show();
-                });
-                $(this).find('.error').fadeIn('fast', function () {
+            if (!password) {
+                $error.fadeIn('fast', function () {
+                    $error.css('top', '96px').find("span").html("请输入密码");
                     $('.password').focus();
                 });
                 return false;
@@ -119,11 +119,11 @@
                 rememberMe: $("#rememberMe").is(":checked")
             };
 
-            shareshttp.login(data, function (data) {
+            shares.login(data, function (data) {
                 if (data.code === 0) {
-                    shareshttp.toHome();
+                    shares.toHome();
                 } else {
-                    $error.html(data.message || "登录失败");
+                    $error.find("span").html(data.message || "登录失败").show();
                     $("#username").focus();
                     $("#password").val("");
                 }

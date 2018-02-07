@@ -12,6 +12,8 @@ public interface ConstantsBO {
         String SHARES_SESSION_STATUS = "shares_session_status";
         String SHARES_SESSION_LOGIN = "shares_session_login";
         String SHARES_REDIS_CACHE = "shares_redis_cache:";
+        /** 菜单SESSION_KEY */
         String SHARES_SESSION_MENU = "shares_session_menu";
+        String SHARES_CRUMB_MENU = "shares_crumb_menu";
     }
 }
