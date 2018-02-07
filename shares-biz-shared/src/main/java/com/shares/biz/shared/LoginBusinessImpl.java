@@ -4,7 +4,6 @@ import com.shares.biz.shared.base.Business;
 import com.shares.biz.shared.shiro.token.manager.TokenManager;
 import com.shares.common.service.facade.dto.SysUserParamDTO;
 import com.shares.common.service.facade.enums.ResponseEnum;
-import com.shares.common.util.JsonUtils;
 import com.shares.core.model.bo.ConstantsBO;
 import com.shares.core.service.exception.ServiceException;
 import org.apache.shiro.authc.AuthenticationException;
@@ -15,6 +14,7 @@ import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -24,15 +24,17 @@ import javax.servlet.http.HttpServletRequest;
 @Business
 public class LoginBusinessImpl implements LoginBusiness {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginBusinessImpl.class);
+    @Inject
+    private UserBusiness userBusiness;
 
     @Override
     public String login(HttpServletRequest request, SysUserParamDTO user) {
         try {
-            Session session = TokenManager.getSession();
-            LOGGER.info("{}", session.getId());
             TokenManager.login(user);
-            session.setAttribute(ConstantsBO.Session.SHARES_SESSION_STATUS, JsonUtils.objectToJson(TokenManager.getCurrentUser()));
-        } catch (IncorrectCredentialsException e){
+            Session session = TokenManager.getSession();
+            session.setAttribute(ConstantsBO.Session.SHARES_SESSION_MENU,
+                    userBusiness.getMenuTree(TokenManager.getUserId()));
+        } catch (IncorrectCredentialsException e) {
             throw new ServiceException(ResponseEnum.USERNAME_PWD_ERROR);
         } catch (AuthenticationException e) {
             throw new ServiceException(ResponseEnum.UNKNOWN_EXCEPTION);

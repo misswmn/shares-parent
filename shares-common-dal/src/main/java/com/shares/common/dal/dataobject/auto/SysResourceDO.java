@@ -15,6 +15,8 @@ public class SysResourceDO {
 
     private String resDesc;
 
+    private String menuCode;
+
     private String resIcon;
 
     private String resType;
@@ -79,6 +81,14 @@ public class SysResourceDO {
 
     public void setResDesc(String resDesc) {
         this.resDesc = resDesc == null ? null : resDesc.trim();
+    }
+
+    public String getMenuCode() {
+        return menuCode;
+    }
+
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode == null ? null : menuCode.trim();
     }
 
     public String getResIcon() {

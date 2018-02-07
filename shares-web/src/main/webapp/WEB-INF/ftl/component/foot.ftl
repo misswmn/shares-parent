@@ -8,22 +8,34 @@
 </a>
 <!-- END QUICK SIDEBAR -->
 </div>
-</div>
-<!-- BEGIN CORE PLUGINS -->
-<script src="system/js/jquery.js" type="text/javascript"></script>
-<script src="system/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-<script src="assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="${base}/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="${base}/assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="${base}/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="${base}/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${base}/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="${base}/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="${base}/assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
-<!-- BEGIN THEME GLOBAL SCRIPTS -->
-<script src="assets/global/scripts/app.min.js" type="text/javascript"></script>
-<!-- END THEME GLOBAL SCRIPTS -->
-<!-- BEGIN THEME LAYOUT SCRIPTS -->
-<script src="assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
-<script src="assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
-<script src="assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-<script src="assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="${base}/assets/scripts/app.js" type="text/javascript"></script>
+<script src="${base}/system/js/shareshttp.js" type="text/javascript"></script>
+<#--<script src="assets/scripts/index.js" type="text/javascript"></script>-->
+<#--<script src="assets/scripts/tasks.js" type="text/javascript"></script>-->
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+    jQuery(document).ready(function() {
+        App.init(); // initlayout and core plugins
+        // Index.init();
+        // Index.initJQVMAP(); // init index page's custom scripts
+        // Index.initCalendar(); // init index page's custom scripts
+        // Index.initCharts(); // init index page's custom scripts
+        // Index.initChat();
+        // Index.initMiniCharts();
+        // Index.initDashboardDaterange();
+        // Index.initIntro();
+        // Tasks.initDashboardWidget();
+    });
+</script>
 </body>
 </html>

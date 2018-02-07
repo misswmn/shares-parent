@@ -36,6 +36,9 @@
         },
         toHome: function () {
             location.href = this.getPath(url.home);
+        },
+        jump: function (url, data) {
+            location.href = this.getPath("/page/"+url) + "?data=" + encodeURI(data || "");
         }
     };
 });

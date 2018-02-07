@@ -16,6 +16,8 @@ public class SysUserResourceInfoDO {
 
     private String resDesc;
 
+    private String menuCode;
+
     private String resIcon;
 
     private String resType;
@@ -84,5 +86,13 @@ public class SysUserResourceInfoDO {
 
     public void setSequence(Long sequence) {
         this.sequence = sequence;
+    }
+
+    public String getMenuCode() {
+        return menuCode;
+    }
+
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode;
     }
 }

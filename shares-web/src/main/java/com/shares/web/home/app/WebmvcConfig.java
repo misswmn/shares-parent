@@ -113,10 +113,7 @@ public class WebmvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("assets/**").addResourceLocations("/assets/");
-        registry.addResourceHandler("system/js/**").addResourceLocations("/system/js/");
-        registry.addResourceHandler("system/css/**").addResourceLocations("/system/css/");
-        registry.addResourceHandler("system/images/**").addResourceLocations("/system/images/");
-        registry.addResourceHandler("system/bootstrap/**").addResourceLocations("/system/bootstrap/");
+        registry.addResourceHandler("system/**").addResourceLocations("/system/");
         registry.addResourceHandler("/WEB-INF/ftl/**").addResourceLocations("/WEB-INF/ftl/");
     }
 

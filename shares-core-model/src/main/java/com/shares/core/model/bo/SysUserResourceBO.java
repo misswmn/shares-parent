@@ -13,6 +13,7 @@ public class SysUserResourceBO {
     private String resName;
     private String resUrl;
     private String parentCode;
+    private String menuCode;
     private String resDesc;
     private String resIcon;
     private String resType;
@@ -80,5 +81,13 @@ public class SysUserResourceBO {
 
     public void setChildNodes(List<SysUserResourceBO> childNodes) {
         this.childNodes = childNodes;
+    }
+
+    public String getMenuCode() {
+        return menuCode;
+    }
+
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode;
     }
 }

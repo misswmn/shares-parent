@@ -5,6 +5,7 @@ import com.shares.common.dal.dataobject.SysUserResourceInfoDO;
 import com.shares.common.util.JsonUtils;
 import com.shares.core.model.bo.SysUserResourceBO;
 import com.shares.core.model.enums.ResourceCodeEnum;
+import com.shares.core.model.enums.ResourceTypeEnum;
 import com.shares.core.service.ResourceCoreService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -73,7 +74,9 @@ public class ResourceCoreServiceImpl implements ResourceCoreService {
                 } else {
                     children = tree.getChildNodes();
                 }
-                children.add(child);
+                if (!ResourceTypeEnum.BUTTON.getCode().equals(srcItem.getResType())) {
+                    children.add(child);
+                }
             }
         }
 

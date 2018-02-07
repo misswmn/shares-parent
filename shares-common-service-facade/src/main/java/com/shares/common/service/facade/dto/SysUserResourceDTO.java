@@ -14,6 +14,7 @@ public class SysUserResourceDTO implements Serializable {
     private String resName;
     private String resUrl;
     private String parentCode;
+    private String menuCode;
     private String resDesc;
     private String resIcon;
     private String resType;
@@ -81,5 +82,13 @@ public class SysUserResourceDTO implements Serializable {
 
     public void setChildNodes(List<SysUserResourceDTO> childNodes) {
         this.childNodes = childNodes;
+    }
+
+    public String getMenuCode() {
+        return menuCode;
+    }
+
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode;
     }
 }
