@@ -9,13 +9,13 @@ public interface PageParam {
 	 * 
 	 * @return 分页大小
 	 */
-	int getCount();
+	Integer getCount();
 
 	/**
 	 * 请求页数
 	 * 
 	 * @return 页数
 	 */
-	int getPage();
+	Integer getPage();
 
 }

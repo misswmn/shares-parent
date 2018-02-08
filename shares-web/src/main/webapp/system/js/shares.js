@@ -1,8 +1,9 @@
 var shares = function () {
     var domain = "http://mreagle.cn:8080/shares";
-    var url = {
+    var action = {
         "login": "/user/login",
-        "home": "/main"
+        "home": "/main",
+        "user_list": "/user/list"
     };
     var post = function (url, data, cb, autoHandle) {
         var path = getPath(url);
@@ -18,7 +19,7 @@ var shares = function () {
                     if (response.code === 0) {
                         typeof cb === 'function' && cb(response);
                     } else {
-                        alert(response.message || "系统错误");
+                        alert(response.message || "系统繁忙");
                         reject(response);
                     }
                 } else {
@@ -37,13 +38,16 @@ var shares = function () {
 
     return {
         login: function (data, cb) {
-            post(url.login, data, cb, false);
+            post(action.login, data, cb, false);
         },
         toHome: function () {
-            location.href = getPath(url.home);
+            location.href = getPath(action.home);
         },
         jump: function (url, data) {
             location.href = getPath("/page/" + url) + "?data=" + encodeURI(data || "");
+        },
+        userList: function (option, cb) {
+            post(action.user_list, option, cb);
         }
     }
 }();

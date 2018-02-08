@@ -101,15 +101,15 @@
             var $error = $(".error");
             if (!username) {
                 $error.fadeIn("fast", function () {
-                    $error.css("top", "27px").find("span").html("请输入用户名");
+                    $error.find("span").html("请输入用户名");
                     $("#username").focus();
                 });
                 return false;
             }
             if (!password) {
                 $error.fadeIn('fast', function () {
-                    $error.css('top', '96px').find("span").html("请输入密码");
-                    $('.password').focus();
+                    $error.find("span").html("请输入密码");
+                    $('#password').focus();
                 });
                 return false;
             }

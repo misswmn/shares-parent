@@ -32,8 +32,8 @@ public class PageResult<E> implements Serializable {
 
 	public PageResult(List<E> rows, int total, int page, int count) {
 		this(rows, total);
-		this.page = page;
-		this.count = count;
+		if (page > 0) this.page = page;
+		if (count > 0) this.count = count;
 	}
 
 	public int getPage() {

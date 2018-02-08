@@ -15,11 +15,21 @@
     <link href="${base}/assets/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
-    <#--<link href="${base}/assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>-->
+<#--<link href="${base}/assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>-->
     <link href="${base}/assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="${base}/assets/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
+    <!-- BOOTSTRAP TABLE BEGIN -->
+    <link href="${base}/assets/plugins/bootstrap-table/css/bootstrap-table.css"/>
+    <link href="${base}/system/css/jquery.mloading.css" rel="stylesheet" type="text/css">
+    <!-- BOOTSTRAP TABLE EDN -->
     <link rel="shortcut icon" href="favicon.ico"/>
+
+    <script src="${base}/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="${base}/assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="${base}/assets/plugins/bootstrap-table/js/bootstrap-table.js"></script>
+    <script src="${base}/assets/plugins/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+    <script src="${base}/system/js/jquery.mloading.js" type="text/javascript"></script>
 </head>
 <body class="page-header-fixed">
 <!-- BEGIN HEADER -->
