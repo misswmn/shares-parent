@@ -1,5 +1,6 @@
 package com.shares.common.service.facade.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,8 @@ import java.util.List;
  * @date 2017/6/27
  * @description
  */
-public class SysUserParamDTO {
+public class SysUserParamDTO implements Serializable {
+    private static final long serialVersionUID = -7113491009854923291L;
     private List<String> roles;
     private String username;
     private String password;

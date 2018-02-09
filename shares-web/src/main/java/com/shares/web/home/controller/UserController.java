@@ -1,7 +1,6 @@
 package com.shares.web.home.controller;
 
 import com.shares.biz.shared.LoginBusiness;
-import com.shares.biz.shared.PermissionSupportBusiness;
 import com.shares.biz.shared.UserBusiness;
 import com.shares.common.service.facade.dto.SysUserParamDTO;
 import com.shares.common.service.facade.dto.page.PageRequestDTO;
@@ -9,6 +8,7 @@ import com.shares.core.service.exception.ResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +34,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/list")
-    public ResultBean list(PageRequestDTO<SysUserParamDTO> requestDTO, BindingResult result) {
+    public ResultBean list(@RequestBody PageRequestDTO<SysUserParamDTO> requestDTO, BindingResult result) {
         return ResultBean.format(userBusiness.listUser(requestDTO));
     }
 

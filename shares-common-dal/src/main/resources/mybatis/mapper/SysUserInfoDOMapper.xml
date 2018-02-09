@@ -18,42 +18,40 @@
     <select id="listUserByPage" resultMap="BaseResultMap"
             parameterType="com.shares.common.dal.plugin.common.model.PageResult">
         SELECT
-            USER_ID,
-            USERNAME,
-            PASSWORD,
-            MOBILE,
-            ADDRESS,
-            STATUS,
-            CREATE_TIME,
-            UPDATE_TIME
+        USER_ID,
+        USERNAME,
+        PASSWORD,
+        MOBILE,
+        ADDRESS,
+        STATUS,
+        CREATE_TIME,
+        UPDATE_TIME
         FROM
-            SYS_USER a
+        SYS_USER a
         WHERE
-            a.IS_DELETE = 'N'
+        a.IS_DELETE = 'N'
         <include refid="listUserByPageQuery"></include>
     </select>
     <sql id="listUserByPageQuery">
-        <if test="param != null">
-            <if test="param.username != null and param.username != ''">
-                AND a.USERNAME = #{param.username}
-            </if>
-            <if test="param.password != null and param.password != ''">
-                AND a.USERNAME = #{param.username}
-            </if>
+        <if test="username != null and username != ''">
+            AND a.USERNAME = #{username}
+        </if>
+        <if test="password != null and password != ''">
+            AND a.PAPSSWORD = #{password}
         </if>
     </sql>
 
 
-    <resultMap id="SysUserResourceMap" type="com.shares.common.dal.dataobject.SysUserResourceInfoDO" >
-        <result column="RES_CODE" property="resCode" jdbcType="VARCHAR" />
-        <result column="RES_NAME" property="resName" jdbcType="VARCHAR" />
-        <result column="RES_URL" property="resUrl" jdbcType="VARCHAR" />
-        <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
-        <result column="RES_DESC" property="resDesc" jdbcType="VARCHAR" />
-        <result column="MENU_CODE" property="menuCode" jdbcType="VARCHAR" />
-        <result column="RES_ICON" property="resIcon" jdbcType="VARCHAR" />
-        <result column="RES_TYPE" property="resType" jdbcType="VARCHAR" />
-        <result column="SEQUENCE" property="sequence" jdbcType="BIGINT" />
+    <resultMap id="SysUserResourceMap" type="com.shares.common.dal.dataobject.SysUserResourceInfoDO">
+        <result column="RES_CODE" property="resCode" jdbcType="VARCHAR"/>
+        <result column="RES_NAME" property="resName" jdbcType="VARCHAR"/>
+        <result column="RES_URL" property="resUrl" jdbcType="VARCHAR"/>
+        <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR"/>
+        <result column="RES_DESC" property="resDesc" jdbcType="VARCHAR"/>
+        <result column="MENU_CODE" property="menuCode" jdbcType="VARCHAR"/>
+        <result column="RES_ICON" property="resIcon" jdbcType="VARCHAR"/>
+        <result column="RES_TYPE" property="resType" jdbcType="VARCHAR"/>
+        <result column="SEQUENCE" property="sequence" jdbcType="BIGINT"/>
     </resultMap>
 
     <select id="getMenuTree" resultMap="SysUserResourceMap"

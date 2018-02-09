@@ -30,6 +30,14 @@
             param: {}
         }
     };
+    var respHandler = function (resp) {
+        var result = {};
+        if (!resp || resp.code !== 0) return result;
+        var content = resp.content || {};
+        result.total = content.total || 0;
+        result.rows = content.rows || [];
+        return result;
+    };
     var $table = $("#user_list_table");
     $table.bootstrapTable({
         url: "/shares/user/list",
@@ -43,6 +51,7 @@
         sidePagination: "server",
         pageNumber: 1,
         pageSize: 10,
+        responseHandler: respHandler,
         clickToSelect: true,
         columns: columns
     });

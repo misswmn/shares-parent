@@ -11,18 +11,25 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
+import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -40,11 +47,44 @@ import java.util.Properties;
 public class WebmvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
-    public InternalResourceViewResolver viewResolver() {
+    public InternalResourceViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/view/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
+    }
+
+    @Bean
+    public ContentNegotiatingViewResolver contentNegotiatingViewResolver() {
+        ContentNegotiatingViewResolver viewResolver = new ContentNegotiatingViewResolver();
+        viewResolver.setViewResolvers(Arrays.asList(freeMarkerViewResolver(), beanNameViewResolver(), internalResourceViewResolver()));
+        viewResolver.setContentNegotiationManager(contentNegotiationManager().getObject());
+        viewResolver.setDefaultViews(Arrays.asList(new MappingJackson2JsonView()));
+        return viewResolver;
+    }
+
+    @Bean
+    public BeanNameViewResolver beanNameViewResolver() {
+        return new BeanNameViewResolver();
+    }
+
+    @Bean
+    public ContentNegotiationManagerFactoryBean contentNegotiationManager() {
+        ContentNegotiationManagerFactoryBean factoryBean = new ContentNegotiationManagerFactoryBean();
+        factoryBean.setFavorParameter(true);
+        factoryBean.setFavorPathExtension(false);
+        Properties mediaTypes = new Properties();
+        mediaTypes.put("html", "text/html");
+        mediaTypes.put("json", "application/json");
+        factoryBean.setMediaTypes(mediaTypes);
+        return factoryBean;
+    }
+
+    @Bean
+    public RequestMappingHandlerAdapter requestMappingHandlerAdapter() {
+        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+        adapter.setMessageConverters(Arrays.asList(new MappingJackson2HttpMessageConverter()));
+        return adapter;
     }
 
     @Bean

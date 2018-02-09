@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
         if (pageRequest.getParam() != null) {
             UserParamDO paramDO = new UserParamDO();
             BeanUtils.copyProperties(pageRequest.getParam(), paramDO);
+            request.setParam(paramDO);
         }
         PageResult<SysUserDO> pageResult = pageRepository.selectPaging(SysUserInfoDOMapper.class, "listUserByPage", request);
         PageResult<SysUserBO> result = new PageResult<>();

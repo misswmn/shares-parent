@@ -31,4 +31,8 @@ public class PageRequest<T> implements PageParam {
     public void setCount(Integer count) {
         this.count = count;
     }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
 }
