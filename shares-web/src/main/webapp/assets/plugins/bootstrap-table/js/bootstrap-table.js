@@ -603,7 +603,7 @@
             '<div class="fixed-table-header"><table></table></div>',
             '<div class="fixed-table-body">',
             '<div class="fixed-table-loading">',
-            this.options.formatLoadingMessage(),
+            '',
             '</div>',
             '</div>',
             '<div class="fixed-table-footer"><table><tr></tr></table></div>',
@@ -2009,7 +2009,8 @@
         }
 
         if (!silent) {
-            this.$tableLoading.show();
+            // this.$tableLoading.show();
+            shares.loading();
         }
         request = $.extend({}, calculateObjectValue(null, this.options.ajaxOptions), {
             type: this.options.method,
@@ -2024,11 +2025,17 @@
 
                 that.load(res);
                 that.trigger('load-success', res);
-                if (!silent) that.$tableLoading.hide();
+                if (!silent) {
+                    // that.$tableLoading.hide();
+                    shares.closeLoading("loading");
+                }
             },
             error: function (res) {
                 that.trigger('load-error', res.status, res);
-                if (!silent) that.$tableLoading.hide();
+                if (!silent) {
+                    // that.$tableLoading.hide();
+                    shares.closeLoading("loading");
+                }
             }
         });
 

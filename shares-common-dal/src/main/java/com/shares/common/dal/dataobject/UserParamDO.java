@@ -8,6 +8,7 @@ package com.shares.common.dal.dataobject;
 public class UserParamDO {
     private String username;
     private String password;
+    private String mobile;
 
     public String getUsername() {
         return username;
@@ -23,5 +24,13 @@ public class UserParamDO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }

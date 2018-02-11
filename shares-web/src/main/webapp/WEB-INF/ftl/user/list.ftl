@@ -10,7 +10,7 @@
         </div>
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
-            <form action="#" class="form-horizontal">
+            <form action="#" class="form-horizontal" id="user_list_form">
                 <div class="form-body">
                     <!--/row-->
                     <div class="row">
@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">用户名</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="username">
                                 </div>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3">手机号</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="mobile">
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn green">查询</button>
+                                <button type="button" class="btn green" id="user_list_submit">查询</button>
                                 <button type="button" class="btn default">重置</button>
                             </div>
                         </div>

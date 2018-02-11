@@ -18,7 +18,6 @@
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${base}/assets/scripts/app.js" type="text/javascript"></script>
-<script src="${base}/system/js/shares.js" type="text/javascript"></script>
 <#--<script src="assets/scripts/index.js" type="text/javascript"></script>-->
 <#--<script src="assets/scripts/tasks.js" type="text/javascript"></script>-->
 <!-- END PAGE LEVEL SCRIPTS -->

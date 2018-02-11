@@ -13,6 +13,8 @@ import java.util.List;
 public class SysUserParamDTO implements Serializable {
     private static final long serialVersionUID = -7113491009854923291L;
     private List<String> roles;
+    private Long seqId;
+    private String userId;
     private String username;
     private String password;
     private String mobile;
@@ -83,5 +85,21 @@ public class SysUserParamDTO implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Long getSeqId() {
+        return seqId;
+    }
+
+    public void setSeqId(Long seqId) {
+        this.seqId = seqId;
     }
 }

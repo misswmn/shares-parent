@@ -17,7 +17,8 @@
     <link href="${base}/assets/css/pages/login-soft.css" rel="stylesheet" type="text/css"/>
     <link href="${base}/assets/css/custom.css" rel="stylesheet" type="text/css"/>
 
-    <link rel="stylesheet" href="${base}/system/css/jquery.mloading.css" type="text/css">
+    <link href="${base}/system/css/loading/loading.css" rel="stylesheet" type="text/css">
+    <link href="${base}/system/css/loading/animate.css" rel="stylesheet" type="text/css">
 </head>
 <body id="body" class="login">
 <div class="logo">
@@ -74,7 +75,7 @@
 <script src="${base}/assets/scripts/app.js" type="text/javascript"></script>
 <#--<script src="assets/scripts/login-soft.js" type="text/javascript"></script>-->
 
-<script type="text/javascript" src="${base}/system/js/jquery.mloading.js"></script>
+<script type="text/javascript" src="${base}/system/js/loading.js"></script>
 <script type="text/javascript" src="${base}/system/js/MD5.js"></script>
 <#--<script type="text/javascript" src="system/js/global.js"></script>-->
 <script type="text/javascript" src="${base}/system/js/shares.js"></script>
