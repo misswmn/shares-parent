@@ -14,14 +14,14 @@
     var $form = $("#user_list_form"),
         $submit = $("#user_list_submit");
     $submit.click(function () {
-        renderTable(shares.serializeArray($form), true);
+        renderTable($form, true);
     });
 
-    var renderTable = function (searchParams, refresh) {
+    var renderTable = function (form, refresh) {
         shares.render({
             url: "user_list",
             selector: $("#user_list_table"),
-            searchParams: searchParams,
+            param: shares.serializeArray(form),
             refresh: refresh,
             columns: columns
         });

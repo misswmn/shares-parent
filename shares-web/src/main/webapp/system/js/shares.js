@@ -1,5 +1,6 @@
 var shares = function () {
     var domain = "http://mreagle.cn:8080/shares";
+    var session_param = "session_param";
     var action = {
         "login": "/user/login",
         "home": "/main",
@@ -52,6 +53,21 @@ var shares = function () {
             loadingMaskBg: 'rgba(0,0,0,0.2)'
         });
     };
+    var serialize = function (selector) {
+        if (!selector) {
+            return {};
+        }
+        var serializeObj = {},
+            array = selector.serializeArray();
+        $(array).each(function () {
+            if (serializeObj[this.name]) {
+                serializeObj[this.name] += ';' + this.value;
+            } else {
+                serializeObj[this.name] = this.value;
+            }
+        });
+        return serializeObj;
+    };
 
     return {
         login: function (data, cb) {
@@ -67,16 +83,7 @@ var shares = function () {
             post(action.user_list, option, cb);
         },
         serializeArray: function (selector) {
-            var serializeObj = {},
-                array = selector.serializeArray();
-            $(array).each(function () {
-                if (serializeObj[this.name]) {
-                    serializeObj[this.name] += ';' + this.value;
-                } else {
-                    serializeObj[this.name] = this.value;
-                }
-            });
-            return serializeObj;
+            return serialize(selector);
         },
         render: function (conf) {
             if (!conf) {
@@ -88,11 +95,20 @@ var shares = function () {
             if (!conf.selector) {
                 return;
             }
+
+            var getParams = function (key) {
+                var param = sessionStorage.getItem(key || session_param) || "{}";
+                return JSON.parse(param);
+            };
+            var setParams = function (param) {
+                sessionStorage.setItem(session_param, JSON.stringify(param || {}));
+            };
+            setParams(conf.param);
             var condition = function (params) {
                 return {
                     page: params.pageNumber,
                     count: params.pageSize,
-                    param: conf.searchParams || {}
+                    param: getParams()
                 }
             };
             var respHandler = function (resp) {
@@ -125,9 +141,10 @@ var shares = function () {
             if (conf.refresh === undefined || conf.refresh === false) {
                 $table.bootstrapTable($.extend({}, custom_option, default_options));
             } else {
+                $table.bootstrapTable("selectPage", 1);
                 $table.bootstrapTable("refresh", {
                     url: getPath(action[conf.url]),
-                    query: conf.searchParams || {}
+                    query: {param: getParams() || {}}
                 });
             }
         },

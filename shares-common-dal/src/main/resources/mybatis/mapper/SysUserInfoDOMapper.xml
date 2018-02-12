@@ -16,7 +16,7 @@
     </resultMap>
 
     <select id="listUserByPage" resultMap="BaseResultMap"
-            parameterType="com.shares.common.dal.plugin.common.model.PageResult">
+            parameterType="com.shares.common.dal.plugin.common.model.PageRequest">
         SELECT
         SEQ_ID,
         USER_ID,
@@ -35,10 +35,7 @@
     </select>
     <sql id="listUserByPageQuery">
         <if test="username != null and username != ''">
-            AND a.USERNAME = #{username}
-        </if>
-        <if test="password != null and password != ''">
-            AND a.PAPSSWORD = #{password}
+            AND a.USERNAME LIKE CONCAT('%', #{username}, '%')
         </if>
         <if test="mobile != null and mobile != ''">
             AND a.MOBILE LIKE CONCAT('%', #{mobile}, '%')
